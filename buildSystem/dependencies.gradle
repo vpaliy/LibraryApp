@@ -79,6 +79,8 @@ ext {
 
     dataDependencies = [
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
+            supportDesign:       "com.android.support:design:${supportVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
@@ -90,9 +92,9 @@ ext {
     ]
 
     dataTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            jUnit :             "junit:junit:${jUnitVersion}",
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}",
             robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
     ]
 
