@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def config = rootProject.ext.configuration
+def libs=rootProject.ext.presentationDependencies
+def testLibs=rootProject.ext.presentationTestDependencies
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner config.testInstrumentationRunner
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    compile libs.butterKnife
+    compile libs.recyclerView
+    compile libs.supportDesign
+    compile libs.supportAppCompat
+
+    testCompile testLibs.mockito
+    testCompile testLibs.espresso
+    testCompile testLibs.jUnit
+
+}
