@@ -1,4 +1,4 @@
-package com.vpaliy.data.dataSource.local;
+package com.vpaliy.data.source.local;
 
 import android.provider.BaseColumns;
 
@@ -24,5 +24,7 @@ class PersistenceContract {
          static final String COLUMN_NAME_AUTHOR="author";
          static final String COLUMN_NAME_DESCRIPTION = "description";
          static final String COLUMN_NUMBER_OF_PAGES="numberOfPages";
+         static final String COLUMN_GENRE="genre";
+         static final String COLUMN_AGE_RESTRICTION="ageRestriction";
     }
 }

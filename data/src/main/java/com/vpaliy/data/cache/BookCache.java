@@ -1,7 +1,6 @@
 package com.vpaliy.data.cache;
 
 import android.content.Context;
-import com.vpaliy.data.dataSource.Specification;
 import com.vpaliy.data.entity.BookEntity;
 import java.io.File;
 import java.util.concurrent.Executor;
@@ -9,7 +8,9 @@ import java.util.concurrent.Executors;
 
 import android.support.annotation.NonNull;
 
-public class BookCache extends Cache<BookEntity,Specification> {
+public class BookCache extends Cache<BookEntity> {
+
+    private final static String DEFAULT_NAME="book:";
 
     private final Serializer<BookEntity> serializer;
     private final File cacheDir;
@@ -23,8 +24,8 @@ public class BookCache extends Cache<BookEntity,Specification> {
     @Override
     public void add(BookEntity item) {
         if(item!=null) {
-            final File userFile=buildFile(item);
-            if(!isCached(null)) {
+            final File userFile=buildFile(item.getID());
+            if(!isCached(item.getID())) {
                 final String jsonString=serializer.serialize(item,BookEntity.class);
                 executeAsynchronously(new CacheWriter(userFile,jsonString));
             }
@@ -32,13 +33,15 @@ public class BookCache extends Cache<BookEntity,Specification> {
     }
 
     @Override
-    public BookEntity get(Specification params) {
-        return null;
+    public BookEntity get(int ID) {
+        File file=buildFile(ID);
+        String fileContent=FileManager.readFileContent(file);
+        return serializer.deserialize(fileContent,BookEntity.class);
     }
 
     @Override
-    public boolean isCached(Specification specification) {
-        return false;
+    public boolean isCached(int ID) {
+        return FileManager.exists(buildFile(ID));
     }
 
     @Override
@@ -46,12 +49,12 @@ public class BookCache extends Cache<BookEntity,Specification> {
         executeAsynchronously(new ClearTask(cacheDir));
     }
 
-    private File buildFile(@NonNull BookEntity entity) {
+    private File buildFile(int ID) {
         final StringBuilder fileNameBuilder = new StringBuilder();
         fileNameBuilder.append(this.cacheDir.getPath());
         fileNameBuilder.append(File.separator);
-        fileNameBuilder.append(entity.getClass().getSimpleName());
-        //fileNameBuilder.append(entity.getId());
+        fileNameBuilder.append(DEFAULT_NAME);
+        fileNameBuilder.append(ID);
 
         return new File(fileNameBuilder.toString());
 

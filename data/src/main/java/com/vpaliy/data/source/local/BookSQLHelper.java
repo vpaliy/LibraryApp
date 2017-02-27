@@ -1,23 +1,16 @@
-package com.vpaliy.data.dataSource.local;
+package com.vpaliy.data.source.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.vpaliy.data.dataSource.Repository;
+import static com.vpaliy.data.source.local.DBConstants.COMMA_SEP;
+import static com.vpaliy.data.source.local.DBConstants.CREATE;
+import static com.vpaliy.data.source.local.DBConstants.INTEGER_TYPE;
+import static com.vpaliy.data.source.local.DBConstants.PRIMARY_KEY;
+import static com.vpaliy.data.source.local.DBConstants.TEXT_TYPE;
 
-import static com.vpaliy.data.dataSource.local.DBConstants.COMMA_SEP;
-import static com.vpaliy.data.dataSource.local.DBConstants.CREATE;
-import static com.vpaliy.data.dataSource.local.DBConstants.INTEGER_TYPE;
-import static com.vpaliy.data.dataSource.local.DBConstants.PRIMARY_KEY;
-import static com.vpaliy.data.dataSource.local.DBConstants.TEXT_TYPE;
-
-import static com.vpaliy.data.dataSource.local.PersistenceContract.BookEntry;
-
-/**
- * Created by vpaliyX on 2/26/17.
- *
- */
+import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 
 class BookSQLHelper  extends SQLiteOpenHelper {
 
@@ -31,7 +24,9 @@ class BookSQLHelper  extends SQLiteOpenHelper {
                     BookEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     BookEntry.COLUMN_NAME_AUTHOR+ TEXT_TYPE + COMMA_SEP +
                     BookEntry.COLUMN_NAME_DESCRIPTION +TEXT_TYPE+COMMA_SEP +
-                    BookEntry.COLUMN_NUMBER_OF_PAGES+INTEGER_TYPE+
+                    BookEntry.COLUMN_NUMBER_OF_PAGES+INTEGER_TYPE+COMMA_SEP+
+                    BookEntry.COLUMN_GENRE+TEXT_TYPE+COMMA_SEP+
+                    BookEntry.COLUMN_AGE_RESTRICTION+INTEGER_TYPE+
                     " )";
 
     private static final int DATABASE_VERSION=1;

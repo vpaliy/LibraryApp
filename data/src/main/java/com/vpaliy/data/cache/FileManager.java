@@ -14,13 +14,6 @@ public final class FileManager {
     }
 
 
-    /**
-     * Writes a file to Disk.
-     * This is an I/O operation and this method executes in the main thread, so it is recommended to
-     * perform this operation using another thread.
-     *
-     * @param file The file to write to Disk.
-     */
     static void writeToFile(File file, String fileContent) {
         if (!file.exists()) {
             try {
@@ -33,14 +26,7 @@ public final class FileManager {
         }
     }
 
-    /**
-     * Reads a content from a file.
-     * This is an I/O operation and this method executes in the main thread, so it is recommended to
-     * perform the operation using another thread.
-     *
-     * @param file The file to read from.
-     * @return A string with the content of the file.
-     */
+
     static String readFileContent(File file) {
         final StringBuilder fileContentBuilder = new StringBuilder();
         if (file.exists()) {
@@ -60,23 +46,11 @@ public final class FileManager {
         return fileContentBuilder.toString();
     }
 
-    /**
-     * Returns a boolean indicating whether this file can be found on the underlying file system.
-     *
-     * @param file The file to check existence.
-     * @return true if this file exists, false otherwise.
-     */
+
     static boolean exists(File file) {
         return file.exists();
     }
 
-    /**
-     * Warning: Deletes the content of a directory.
-     * This is an I/O operation and this method executes in the main thread, so it is recommended to
-     * perform the operation using another thread.
-     *
-     * @param directory The directory which its content will be deleted.
-     */
    static  boolean clearDirectory(File directory) {
         boolean result = false;
         if (directory.exists()) {
@@ -87,14 +61,7 @@ public final class FileManager {
         return result;
     }
 
-    /**
-     * Write a value to a user preferences file.
-     *
-     * @param context {@link android.content.Context} to retrieve android user preferences.
-     * @param preferenceFileName A file name reprensenting where data will be written to.
-     * @param key A string for the key that will be used to retrieve the value in the future.
-     * @param value A long representing the value to be inserted.
-     */
+
     static void writeToPreferences(Context context, String preferenceFileName, String key,
                             long value) {
 
@@ -105,14 +72,7 @@ public final class FileManager {
         editor.apply();
     }
 
-    /**
-     * Get a value from a user preferences file.
-     *
-     * @param context {@link android.content.Context} to retrieve android user preferences.
-     * @param preferenceFileName A file name representing where data will be get from.
-     * @param key A key that will be used to retrieve the value from the preference file.
-     * @return A long representing the value retrieved from the preferences file.
-     */
+
     static long getFromPreferences(Context context, String preferenceFileName, String key) {
         final SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);

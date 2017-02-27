@@ -1,21 +1,17 @@
-package com.vpaliy.data.dataSource.local;
+package com.vpaliy.data.source.local;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.vpaliy.data.dataSource.Repository;
-import com.vpaliy.data.dataSource.Specification;
+import com.vpaliy.data.source.Repository;
 import com.vpaliy.data.entity.BookEntity;
+import com.vpaliy.data.specification.SQLSpecification;
 
 import java.util.List;
 
-/**
- * Created by vpaliyX on 2/26/17.
- *
- */
-
 @SuppressWarnings("WeakerAccess")
-public class LocalBookRepository implements Repository<BookEntity> {
+public class LocalBookRepository
+    implements Repository<BookEntity,SQLSpecification> {
 
     private static LocalBookRepository INSTANCE;
     private BookSQLHelper dbHelper;
@@ -39,12 +35,12 @@ public class LocalBookRepository implements Repository<BookEntity> {
     }
 
     @Override
-    public void update(@NonNull Specification specification) {
+    public void update(@NonNull SQLSpecification specification) {
 
     }
 
     @Override
-    public List<BookEntity> query(@NonNull Specification specification) {
+    public List<BookEntity> query(@NonNull SQLSpecification specification) {
         return null;
     }
 

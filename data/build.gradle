@@ -22,5 +22,6 @@ dependencies {
     testCompile testLibs.jUnit
 
     compile libs.supportAppCompat
+    compile libs.gson
 
 }

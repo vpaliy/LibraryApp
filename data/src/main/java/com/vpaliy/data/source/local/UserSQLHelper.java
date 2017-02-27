@@ -1,17 +1,16 @@
-package com.vpaliy.data.dataSource.local;
+package com.vpaliy.data.source.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.vpaliy.data.dataSource.local.DBConstants.BOOLEAN_TYPE;
-import static com.vpaliy.data.dataSource.local.DBConstants.COMMA_SEP;
-import static com.vpaliy.data.dataSource.local.DBConstants.CREATE;
-import static com.vpaliy.data.dataSource.local.DBConstants.INTEGER_TYPE;
-import static com.vpaliy.data.dataSource.local.DBConstants.PRIMARY_KEY;
-import static com.vpaliy.data.dataSource.local.DBConstants.TEXT_TYPE;
+import static com.vpaliy.data.source.local.DBConstants.COMMA_SEP;
+import static com.vpaliy.data.source.local.DBConstants.CREATE;
+import static com.vpaliy.data.source.local.DBConstants.INTEGER_TYPE;
+import static com.vpaliy.data.source.local.DBConstants.PRIMARY_KEY;
+import static com.vpaliy.data.source.local.DBConstants.TEXT_TYPE;
 
-import static com.vpaliy.data.dataSource.local.PersistenceContract.UserEntry;
+import static com.vpaliy.data.source.local.PersistenceContract.UserEntry;
 
 /**
  * Created by vpaliyX on 2/26/17.

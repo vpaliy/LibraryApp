@@ -1,4 +1,4 @@
-package com.vpaliy.data.dataSource.local;
+package com.vpaliy.data.source.local;
 
 
 final class DBConstants {
