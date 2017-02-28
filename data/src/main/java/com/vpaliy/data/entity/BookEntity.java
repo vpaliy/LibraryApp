@@ -1,13 +1,28 @@
 package com.vpaliy.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BookEntity {
 
+    @SerializedName("author")
     private String author;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("description")
     private String description;
+
+    @SerializedName("genre")
     private String genre;
+
+    @SerializedName("id")
     private int ID;
+
+    @SerializedName("numberOfPages")
     private int numberOfPages;
+
+    @SerializedName("ageRestriction")
     private int ageRestriction;
 
     public BookEntity(String author, String title, int ID){

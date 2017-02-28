@@ -1,11 +1,22 @@
 package com.vpaliy.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserEntity {
 
+    @SerializedName("firstName")
     private String firstName;
+
+    @SerializedName("lastName")
     private String lastName;
+
+    @SerializedName("emailAddress")
     private String emailAddress;
+
+    @SerializedName("id")
     private int ID;
+
+    @SerializedName("age")
     private int age;
 
     public UserEntity(String firstName, String lastName, int ID) {

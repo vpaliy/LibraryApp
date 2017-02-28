@@ -14,7 +14,7 @@ public final class FileManager {
     }
 
 
-    static void writeToFile(File file, String fileContent) {
+    public static void writeToFile(File file, String fileContent) {
         if (!file.exists()) {
             try {
                 final FileWriter writer = new FileWriter(file);
@@ -27,7 +27,7 @@ public final class FileManager {
     }
 
 
-    static String readFileContent(File file) {
+    public static String readFileContent(File file) {
         final StringBuilder fileContentBuilder = new StringBuilder();
         if (file.exists()) {
             String stringLine;
@@ -46,12 +46,11 @@ public final class FileManager {
         return fileContentBuilder.toString();
     }
 
-
-    static boolean exists(File file) {
+    public static boolean exists(File file) {
         return file.exists();
     }
 
-   static  boolean clearDirectory(File directory) {
+    public  static  boolean clearDirectory(File directory) {
         boolean result = false;
         if (directory.exists()) {
             for (File file : directory.listFiles()) {
@@ -62,8 +61,8 @@ public final class FileManager {
     }
 
 
-    static void writeToPreferences(Context context, String preferenceFileName, String key,
-                            long value) {
+    public  static void writeToPreferences(Context context, String preferenceFileName, String key,
+                                           long value) {
 
         final SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
@@ -73,7 +72,7 @@ public final class FileManager {
     }
 
 
-    static long getFromPreferences(Context context, String preferenceFileName, String key) {
+    public  static long getFromPreferences(Context context, String preferenceFileName, String key) {
         final SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceFileName,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getLong(key, 0);

@@ -6,6 +6,8 @@ def testLibs=rootProject.ext.dataTestDependencies
 def libs=rootProject.ext.dataDependencies
 
 android {
+    defaultPublishConfig "debug"
+
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
 
@@ -18,10 +20,13 @@ android {
 }
 
 dependencies {
+
     compile project(':domain')
     compile project(':common')
+
     testCompile testLibs.mockito
     testCompile testLibs.jUnit
+    testCompile testLibs.robolectric
 
     compile libs.supportAppCompat
     compile libs.gson
