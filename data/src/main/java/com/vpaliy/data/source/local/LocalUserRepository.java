@@ -1,12 +1,12 @@
-package com.vpaliy.datasource.data.source.local;
+package com.vpaliy.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
 
 import com.vpaliy.common.Preconditions;
-import com.vpaliy.datasource.data.entity.UserEntity;
-import com.vpaliy.datasource.data.source.Repository;
-import com.vpaliy.datasource.data.specification.SQLSpecification;
+import com.vpaliy.data.entity.UserEntity;
+import com.vpaliy.data.source.Repository;
+import com.vpaliy.data.specification.SQLSpecification;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,12 +15,12 @@ import android.support.annotation.NonNull;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.vpaliy.datasource.data.source.local.PersistenceContract.UserEntry;
-
+import static com.vpaliy.data.source.local.PersistenceContract.UserEntry;
 
 
 @SuppressWarnings("WeakerAccess")
 public class LocalUserRepository implements Repository<UserEntity, SQLSpecification> {
+
 
     private static LocalUserRepository INSTANCE;
 

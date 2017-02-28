@@ -1,12 +1,11 @@
-package com.vpaliy.datasource.data.cache;
 
-
-import android.content.Context;
-import com.vpaliy.datasource.data.entity.UserEntity;
+package com.vpaliy.data.cache;
 
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import android.content.Context;
+import com.vpaliy.data.entity.UserEntity;
 import android.support.annotation.NonNull;
 
 public class UserCache extends Cache<UserEntity> {
@@ -36,7 +35,7 @@ public class UserCache extends Cache<UserEntity> {
     @Override
     public UserEntity get(int ID) {
         File file=buildFile(ID);
-        String fileContent=FileManager.readFileContent(file);
+        String fileContent= FileManager.readFileContent(file);
         return serializer.deserialize(fileContent,UserEntity.class);
     }
 

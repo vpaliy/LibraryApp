@@ -1,16 +1,16 @@
-package com.vpaliy.datasource.data.source.local;
+package com.vpaliy.data.source.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.vpaliy.datasource.data.source.local.DBConstants.COMMA_SEP;
-import static com.vpaliy.datasource.data.source.local.DBConstants.CREATE;
-import static com.vpaliy.datasource.data.source.local.DBConstants.INTEGER_TYPE;
-import static com.vpaliy.datasource.data.source.local.DBConstants.PRIMARY_KEY;
-import static com.vpaliy.datasource.data.source.local.DBConstants.TEXT_TYPE;
+import static com.vpaliy.data.source.local.DBConstants.COMMA_SEP;
+import static com.vpaliy.data.source.local.DBConstants.CREATE;
+import static com.vpaliy.data.source.local.DBConstants.INTEGER_TYPE;
+import static com.vpaliy.data.source.local.DBConstants.PRIMARY_KEY;
+import static com.vpaliy.data.source.local.DBConstants.TEXT_TYPE;
 
-import static com.vpaliy.datasource.data.source.local.PersistenceContract.BookEntry;
+import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 
 class BookSQLHelper  extends SQLiteOpenHelper {
 

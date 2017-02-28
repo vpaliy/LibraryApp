@@ -1,4 +1,4 @@
-package com.vpaliy.datasource.data.mapper;
+package com.vpaliy.data.mapper;
 
 
 public interface Mapper<From,To> {

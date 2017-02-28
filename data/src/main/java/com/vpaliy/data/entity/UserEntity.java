@@ -1,4 +1,4 @@
-package com.vpaliy.datasource.data.entity;
+package com.vpaliy.data.entity;
 
 public class UserEntity {
 

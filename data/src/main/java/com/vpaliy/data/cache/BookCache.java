@@ -1,13 +1,14 @@
-package com.vpaliy.datasource.data.cache;
+package com.vpaliy.data.cache;
 
 import android.content.Context;
-import com.vpaliy.datasource.data.entity.BookEntity;
 
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import android.support.annotation.NonNull;
+
+import com.vpaliy.data.entity.BookEntity;
 
 public class BookCache extends Cache<BookEntity> {
 
@@ -89,8 +90,8 @@ public class BookCache extends Cache<BookEntity> {
             this.cacheDir = cacheDir;
         }
 
-         @Override
-         public void run() {
+        @Override
+        public void run() {
             FileManager.clearDirectory(this.cacheDir);
         }
     }

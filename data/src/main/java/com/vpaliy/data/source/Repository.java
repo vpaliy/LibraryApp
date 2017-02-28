@@ -1,10 +1,11 @@
-package com.vpaliy.datasource.data.source;
+package com.vpaliy.data.source;
 
 
 import java.util.List;
 import android.support.annotation.NonNull;
 
-import com.vpaliy.datasource.data.specification.Specification;
+import com.vpaliy.data.specification.Specification;
+
 
 public interface Repository<T,S extends Specification> {
 

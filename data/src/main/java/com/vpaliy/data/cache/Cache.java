@@ -1,4 +1,4 @@
-package com.vpaliy.datasource.data.cache;
+package com.vpaliy.data.cache;
 
 
 /**

@@ -1,5 +1,4 @@
-package com.vpaliy.datasource.data.specification;
-
+package com.vpaliy.data.specification;
 
 public interface SQLSpecification extends Specification {
     String[] getProjection();

@@ -14,7 +14,7 @@ public final class Preconditions {
 
     public static void checkIfContains(String[] strings, String ... samples) {
         if(strings.length<samples.length) {
-            throw new IndexOutOfBoundsException("Strings is smaller than samples");
+            throw new IndexOutOfBoundsException("Strings are smaller than samples");
         }
 
         for(String sample:samples) {
@@ -26,7 +26,7 @@ public final class Preconditions {
                 }
             }
 
-            if(contains) {
+            if(!contains) {
                 throw new IllegalArgumentException("Given array does not contain:"+sample);
             }
         }

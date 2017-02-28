@@ -1,4 +1,4 @@
-package com.vpaliy.datasource.data.source.local;
+package com.vpaliy.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.common.Preconditions;
-import com.vpaliy.datasource.data.entity.BookEntity;
-import com.vpaliy.datasource.data.source.Repository;
-import com.vpaliy.datasource.data.specification.SQLSpecification;
+import com.vpaliy.data.source.Repository;
+import com.vpaliy.data.specification.SQLSpecification;
+import com.vpaliy.data.entity.BookEntity;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.vpaliy.datasource.data.source.local.PersistenceContract.BookEntry;
+import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 
 @SuppressWarnings("WeakerAccess")
 public class LocalBookRepository
