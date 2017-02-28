@@ -18,6 +18,8 @@ android {
 }
 
 dependencies {
+    compile project(':domain')
+    compile project(':common')
     testCompile testLibs.mockito
     testCompile testLibs.jUnit
 
