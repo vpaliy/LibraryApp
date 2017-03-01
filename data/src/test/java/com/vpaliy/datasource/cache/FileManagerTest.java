@@ -98,7 +98,7 @@ public class FileManagerTest {
 
 
     @Test
-    public void testWriteToPreferencesInt(){
+    public void testWriteAndReadToPreferencesInt(){
         int value=10;
         FileManager.writeToPreferencesInt(context,PREFERENCE_NAME,KEY,value);
 
@@ -113,7 +113,7 @@ public class FileManagerTest {
 
 
     @Test
-    public void testWriteToPreferencesLong(){
+    public void testWriteAndReadToPreferencesLong(){
         long value=10;
         FileManager.writeToPreferencesLong(context,PREFERENCE_NAME,KEY,value);
 
@@ -128,7 +128,7 @@ public class FileManagerTest {
 
 
     @Test
-    public void testWriteToPreferencesBoolean(){
+    public void testWriteAndReadToPreferencesBoolean(){
         FileManager.writeToPreferencesBoolean(context,PREFERENCE_NAME,KEY,true);
 
         when(editor.putBoolean(KEY,true)).thenReturn(editor);
