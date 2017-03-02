@@ -2,6 +2,7 @@ package com.vpaliy.data.source.repository;
 
 
 import java.util.List;
+
 import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.specification.Specification;
 
@@ -10,7 +11,6 @@ import com.vpaliy.data.source.annotation.Local;
 import com.vpaliy.data.source.annotation.Remote;
 
 /**
- *
  * @param <T> either the UserEntity.class or BookEntity.class
  * @param <L> specification for local data source such as SQLSpecification.class
  * @param <R> specification for remote data source
@@ -22,7 +22,8 @@ public class Repository<T, L extends Specification, R extends Specification>
     private final DataSource<T,L> localDataSource;
     private final DataSource<T,R> remoteDataSource;
 
-    public Repository(@Local  DataSource<T,L> localDataSource, @Remote DataSource<T, R> remoteDataSource) {
+
+    public Repository(@Local DataSource<T,L> localDataSource, @Remote DataSource<T, R> remoteDataSource) {
         this.localDataSource=localDataSource;
         this.remoteDataSource=remoteDataSource;
     }

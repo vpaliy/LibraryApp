@@ -28,6 +28,7 @@ sourceSets {
 
 dependencies {
     compile project(':common')
+    compile project(':data')
 
     testCompile testLibs.mockito
     testCompile testLibs.jUnit

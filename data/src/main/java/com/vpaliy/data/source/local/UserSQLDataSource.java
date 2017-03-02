@@ -16,14 +16,14 @@ import static com.vpaliy.data.source.local.PersistenceContract.UserEntry;
 
 
 @SuppressWarnings("WeakerAccess")
-public class LocalUserDataSource implements DataSource<UserEntity, SQLSpecification> {
+public class UserSQLDataSource implements DataSource<UserEntity, SQLSpecification> {
 
 
-    private static LocalUserDataSource INSTANCE;
+    private static UserSQLDataSource INSTANCE;
 
     private UserSQLHelper dbHelper;
 
-    private LocalUserDataSource(@NonNull Context context) {
+    private UserSQLDataSource(@NonNull Context context) {
         this.dbHelper=new UserSQLHelper(context);
     }
 
@@ -180,10 +180,10 @@ public class LocalUserDataSource implements DataSource<UserEntity, SQLSpecificat
         return userEntity;
     }
 
-    public static LocalUserDataSource getInstance(@NonNull Context context) {
-        synchronized (LocalUserDataSource.class) {
+    public static UserSQLDataSource getInstance(@NonNull Context context) {
+        synchronized (UserSQLDataSource.class) {
             if (INSTANCE == null) {
-                INSTANCE = new LocalUserDataSource(context);
+                INSTANCE = new UserSQLDataSource(context);
             }
         }
         return INSTANCE;

@@ -15,13 +15,13 @@ import android.support.annotation.NonNull;
 import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 
 @SuppressWarnings("WeakerAccess")
-public class LocalBookDataSource
+public class BookSQLDataSource
     implements DataSource<BookEntity,SQLSpecification> {
 
-    private static LocalBookDataSource INSTANCE;
+    private static BookSQLDataSource INSTANCE;
     private BookSQLHelper dbHelper;
 
-    private LocalBookDataSource(@NonNull Context context) {
+    private BookSQLDataSource(@NonNull Context context) {
         this.dbHelper=new BookSQLHelper(context);
     }
     @Override
@@ -195,10 +195,10 @@ public class LocalBookDataSource
         return bookEntity;
     }
 
-    public static LocalBookDataSource getInstance(@NonNull Context context) {
-        synchronized (LocalBookDataSource.class) {
+    public static BookSQLDataSource getInstance(@NonNull Context context) {
+        synchronized (BookSQLDataSource.class) {
             if(INSTANCE==null) {
-                INSTANCE=new LocalBookDataSource(context);
+                INSTANCE=new BookSQLDataSource(context);
             }
         }
         return INSTANCE;
