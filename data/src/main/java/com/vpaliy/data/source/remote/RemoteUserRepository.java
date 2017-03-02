@@ -4,13 +4,13 @@ package com.vpaliy.data.source.remote;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.data.entity.UserEntity;
-import com.vpaliy.data.source.Repository;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.specification.Specification;
 
 import java.util.List;
 
 
-public class RemoteUserRepository implements Repository<UserEntity,Specification> {
+public class RemoteUserRepository implements DataSource<UserEntity,Specification> {
 
     @Override
     public void add(UserEntity item) {
@@ -35,5 +35,10 @@ public class RemoteUserRepository implements Repository<UserEntity,Specification
     @Override
     public void update(@NonNull UserEntity item, @NonNull Specification specification) {
 
+    }
+
+    @Override
+    public UserEntity get(@NonNull Specification specification) {
+        return null;
     }
 }

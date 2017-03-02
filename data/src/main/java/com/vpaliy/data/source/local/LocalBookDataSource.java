@@ -4,26 +4,24 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
-
 import com.vpaliy.common.Preconditions;
-import com.vpaliy.data.source.Repository;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.specification.SQLSpecification;
 import com.vpaliy.data.entity.BookEntity;
-
 import java.util.LinkedList;
 import java.util.List;
+import android.support.annotation.NonNull;
 
 import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 
 @SuppressWarnings("WeakerAccess")
-public class LocalBookRepository
-    implements Repository<BookEntity,SQLSpecification> {
+public class LocalBookDataSource
+    implements DataSource<BookEntity,SQLSpecification> {
 
-    private static LocalBookRepository INSTANCE;
+    private static LocalBookDataSource INSTANCE;
     private BookSQLHelper dbHelper;
 
-    private LocalBookRepository(@NonNull Context context) {
+    private LocalBookDataSource(@NonNull Context context) {
         this.dbHelper=new BookSQLHelper(context);
     }
     @Override
@@ -154,10 +152,53 @@ public class LocalBookRepository
         return result;
     }
 
-    public static LocalBookRepository getInstance(@NonNull Context context) {
-        synchronized (LocalBookRepository.class) {
+    @Override
+    public BookEntity get(@NonNull SQLSpecification specification) {
+        String[] projections=specification.getProjection();
+        Preconditions.checkIfContains(projections, BookEntry.COLUMN_NAME_ENTRY_ID,
+                BookEntry.COLUMN_NAME_TITLE, BookEntry.COLUMN_NAME_AUTHOR);
+        SQLiteDatabase db=dbHelper.getReadableDatabase();
+        String selection=specification.getSelection();
+        String[] selectionArgs=specification.getSelectionArgs();
+        String order=specification.getOrder();
+        Cursor cursor=db.query(BookEntry.TABLE_NAME,
+                projections,selection,selectionArgs,null,null,order);
+        BookEntity bookEntity=null;
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                String title=cursor.getString(cursor.getColumnIndex(BookEntry.COLUMN_NAME_TITLE));
+                String author=cursor.getString(cursor.getColumnIndex(BookEntry.COLUMN_NAME_AUTHOR));
+                int ID=cursor.getInt(cursor.getColumnIndex(BookEntry.COLUMN_NAME_ENTRY_ID));
+                //create an instance
+                bookEntity=new BookEntity(title,author,ID);
+                //fill up with details
+                for(String projection:projections) {
+                    switch (projection) {
+                        case BookEntry.COLUMN_AGE_RESTRICTION:
+                            bookEntity.setAgeRestriction(cursor.getInt(cursor.getColumnIndex(projection)));
+                            break;
+                        case BookEntry.COLUMN_GENRE:
+                            bookEntity.setGenre(cursor.getString(cursor.getColumnIndex(projection)));
+                            break;
+                        case BookEntry.COLUMN_NAME_DESCRIPTION:
+                            bookEntity.setDescription(cursor.getString(cursor.getColumnIndex(projection)));
+                            break;
+                        case BookEntry.COLUMN_NUMBER_OF_PAGES:
+                            bookEntity.setNumberOfPages(cursor.getInt(cursor.getColumnIndex(projection)));
+                            break;
+                    }
+                }
+            }
+            cursor.close();
+        }
+        db.close();
+        return bookEntity;
+    }
+
+    public static LocalBookDataSource getInstance(@NonNull Context context) {
+        synchronized (LocalBookDataSource.class) {
             if(INSTANCE==null) {
-                INSTANCE=new LocalBookRepository(context);
+                INSTANCE=new LocalBookDataSource(context);
             }
         }
         return INSTANCE;

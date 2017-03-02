@@ -3,12 +3,11 @@ package com.vpaliy.data.source.remote;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.data.entity.BookEntity;
-import com.vpaliy.data.source.Repository;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.specification.Specification;
-
 import java.util.List;
 
-public class RemoteBookRepository implements Repository<BookEntity,Specification> {
+public class RemoteBookRepository implements DataSource<BookEntity,Specification> {
 
 
     @Override
@@ -29,6 +28,11 @@ public class RemoteBookRepository implements Repository<BookEntity,Specification
     @Override
     public void update(@NonNull BookEntity item, @NonNull Specification specification) {
 
+    }
+
+    @Override
+    public BookEntity get(@NonNull Specification specification) {
+        return null;
     }
 
     @Override
