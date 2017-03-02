@@ -14,3 +14,10 @@ android {
     }
 
 }
+
+dependencies {
+    def testLibs=rootProject.ext.dataTestDependencies
+
+    testCompile testLibs.mockito
+    testCompile testLibs.jUnit
+}
