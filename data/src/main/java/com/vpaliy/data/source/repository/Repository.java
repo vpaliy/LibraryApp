@@ -2,7 +2,6 @@ package com.vpaliy.data.source.repository;
 
 
 import java.util.List;
-
 import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.specification.Specification;
 
@@ -17,7 +16,7 @@ import com.vpaliy.data.source.annotation.Remote;
  * @param <R> specification for remote data source
  */
 
-public class  Repository<T, L extends Specification, R extends Specification>
+public class Repository<T, L extends Specification, R extends Specification>
                 implements IRepository<T,L,R> {
 
     private final DataSource<T,L> localDataSource;
@@ -57,6 +56,18 @@ public class  Repository<T, L extends Specification, R extends Specification>
     @Override
     public T getFromLocal(@NonNull L specification) {
         return localDataSource.get(specification);
+    }
+
+    @Override
+    public void add(@NonNull T item) {
+        localDataSource.add(item);
+        remoteDataSource.add(item);
+    }
+
+    @Override
+    public void add(@NonNull Iterable<T> items) {
+        localDataSource.add(items);
+        remoteDataSource.add(items);
     }
 
     @Override

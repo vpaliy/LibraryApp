@@ -4,7 +4,6 @@ package com.vpaliy.data.source.repository;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.data.specification.Specification;
-
 import java.util.List;
 
 /**
@@ -22,6 +21,9 @@ public interface IRepository<T, L extends Specification, R extends Specification
     void update(@NonNull T item);
     void updateRemote(@NonNull T item, @NonNull R specification);
     void updateLocal(@NonNull T item, @NonNull L specification);
+
+    void add(@NonNull T item);
+    void add(@NonNull Iterable<T> items);
 
     T getFromRemote(@NonNull R specification);
     T getFromLocal(@NonNull L specification);
