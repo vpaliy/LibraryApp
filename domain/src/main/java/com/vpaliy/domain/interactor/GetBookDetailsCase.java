@@ -1,40 +1,34 @@
 package com.vpaliy.domain.interactor;
 
-import com.vpaliy.data.entity.UserEntity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.vpaliy.data.entity.BookEntity;
 import com.vpaliy.data.source.repository.IRepository;
 import com.vpaliy.data.specification.SQLSpecification;
 import com.vpaliy.data.specification.Specification;
 import com.vpaliy.domain.mapper.Mapper;
-import com.vpaliy.domain.model.UserModel;
-import java.util.List;
+import com.vpaliy.domain.model.BookModel;
 
+public class GetBookDetailsCase extends UseCase<GetBookDetailsCase.Request,GetBookDetailsCase.Response> {
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+    private final IRepository<BookEntity,SQLSpecification,Specification> iRepository;
+    private final Mapper<BookModel,BookEntity> mapper;
 
-public class GetUserListCase extends UseCase<GetUserListCase.Request, GetUserListCase.Response> {
-
-    private final IRepository<UserEntity,SQLSpecification,Specification> iRepository;
-    private final Mapper<UserModel,UserEntity> mapper;
-
-
-    public GetUserListCase(@NonNull IRepository<UserEntity,SQLSpecification,Specification> iRepository,
-                             @NonNull Mapper<UserModel,UserEntity> mapper) {
+    public GetBookDetailsCase(@NonNull IRepository<BookEntity,SQLSpecification,Specification> iRepository,
+                             @NonNull Mapper<BookModel,BookEntity> mapper) {
         this.iRepository=iRepository;
         this.mapper=mapper;
     }
 
     @Override
     void execute(Request request) {
-        List<UserEntity> result=iRepository.queryLocal(request.localSpecification);
+        BookEntity result=iRepository.getFromLocal(request.localSpecification);
         if(result==null) {
-            iRepository.queryRemote(request.remoteSpecification);
+            result=iRepository.getFromRemote(request.remoteSpecification);
         }
 
-       postResponse(new Response(mapper.map(result)));
-
-
-
+        postResponse(new Response(mapper.map(result)));
     }
 
     public static class Request implements UseCase.Request {
@@ -58,15 +52,17 @@ public class GetUserListCase extends UseCase<GetUserListCase.Request, GetUserLis
 
     public static class Response implements UseCase.Response {
 
-        private final List<UserModel> result;
+        private final BookModel result;
 
-        public Response(@Nullable List<UserModel> result) {
+        public Response(@Nullable BookModel result) {
             this.result=result;
         }
 
-        public List<UserModel> getResult() {
+        public BookModel getResult() {
             return result;
         }
     }
+
+
 
 }
