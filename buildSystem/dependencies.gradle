@@ -6,8 +6,9 @@ allprojects {
 
 
 ext {
-    //Android
-    configuration = [
+    /* Android Configuration */
+    configuration =
+     [
             package             : "com.vpaliy.mvp",
             buildToolVersion    :"23.02.2",
             buildToolsVersion   : "24.0.1",
@@ -20,7 +21,7 @@ ext {
 
     ]
 
-    //Libraries
+    /* Library versions */
     daggerVersion = '2.8'
     butterKnifeVersion = '7.0.1'
     supportVersion  = "25.1.0"
@@ -33,7 +34,7 @@ ext {
     androidAnnotationsVersion = '21.0.3'
     arrowVersion = '1.0.0'
 
-    //Testing
+    /* Testing versions */
     robolectricVersion = '3.1.1'
     jUnitVersion = '4.12'
     assertJVersion = '1.7.1'
@@ -42,9 +43,10 @@ ext {
     espressoVersion = '2.0'
     testingSupportLibVersion = '0.1'
 
-    //Development
+    /* Other stuff */
     leakCanaryVersion = '1.3.1'
 
+    /** Presentation module **/
     presentationDependencies = [
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
@@ -64,19 +66,23 @@ ext {
             testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
     ]
 
+
+    /** Domain module **/
     domainDependencies = [
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            RxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             arrow:              "com.fernandocejas:arrow:${arrowVersion}"
     ]
 
     domainTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            JUnit:              "junit:junit:${jUnitVersion}",
+            Mockito:            "org.mockito:mockito-core:${mockitoVersion}",
             assertj:            "org.assertj:assertj-core:${assertJVersion}"
     ]
 
+
+    /** Data module **/
     dataDependencies = [
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
@@ -97,6 +103,7 @@ ext {
             assertj:            "org.assertj:assertj-core:${assertJVersion}",
             robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
     ]
+
 
     developmentDependencies = [
             leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",

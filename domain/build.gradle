@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 
 def config = rootProject.ext.configuration
-def testLibs=rootProject.ext.dataTestDependencies
+def testLibs=rootProject.ext.domainTestDependencies
+def libs=rootProject.ext.domainDependencies
 
 android {
     compileSdkVersion config.compileSdkVersion
@@ -28,10 +29,11 @@ sourceSets {
 
 dependencies {
     compile project(':common')
-    compile project(':data')
 
-    testCompile testLibs.mockito
-    testCompile testLibs.jUnit
+    compile libs.RxJava
+
+    testCompile testLibs.Mockito
+    testCompile testLibs.JUnit
 
 
 }

@@ -1,6 +1,5 @@
 package com.vpaliy.data.cache;
 
-
 import com.google.gson.Gson;
 
 /**

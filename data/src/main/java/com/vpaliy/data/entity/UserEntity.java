@@ -2,6 +2,10 @@ package com.vpaliy.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
 public class UserEntity {
 
     @SerializedName("firstName")
@@ -14,12 +18,15 @@ public class UserEntity {
     private String emailAddress;
 
     @SerializedName("id")
-    private int ID;
+    private String ID;
 
     @SerializedName("age")
     private int age;
 
-    public UserEntity(String firstName, String lastName, int ID) {
+    @SerializedName("bookList")
+    private List<BookEntity> bookList;
+
+    public UserEntity(String firstName, String lastName, String ID) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.ID=ID;
@@ -37,7 +44,7 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -61,7 +68,35 @@ public class UserEntity {
         return lastName;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
+    }
+
+    public List<BookEntity> getBookList() {
+        return bookList;
+    }
+
+    public UserEntity addReader(BookEntity book) {
+        if(bookList==null) {
+            synchronized (this) {
+                if(bookList==null) {
+                    bookList=new LinkedList<>();
+                }
+            }
+        }
+        bookList.add(book);
+        return this;
+    }
+
+    public UserEntity addReaders(Collection<? extends BookEntity> collection) {
+        if(bookList==null) {
+            synchronized (this) {
+                if(bookList==null) {
+                    bookList=new LinkedList<>();
+                }
+            }
+        }
+        bookList.addAll(collection);
+        return this;
     }
 }

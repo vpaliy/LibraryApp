@@ -13,7 +13,7 @@ import org.junit.Test;
 public class SerializerTest {
 
     private static final String JSON_RESPONSE_BOOK = "{\n"
-            + "    \"id\": 0,\n"
+            + "    \"id\":\"Book\" ,\n"
             + "    \"title\": \"Essentialism\",\n"
             + "    \"author\": \"Greg McKeown\",\n"
             + "    \"description\": \"How to eliminate non-essential things\",\n"
@@ -23,7 +23,7 @@ public class SerializerTest {
             + "}";
 
     private static final String JSON_RESPONSE_USER = "{\n"
-            + "    \"id\": 0,\n"
+            + "    \"id\":\"User\" ,\n"
             + "    \"firstName\": \"Greg\",\n"
             + "    \"lastName\": \"McKeown\",\n"
             + "    \"emailAddress\": \"vpaliy97@gmail.com\",\n"
@@ -75,7 +75,7 @@ public class SerializerTest {
     public void testDeserializeUserEntityCase() {
         UserEntity userEntity=userEntitySerializer.deserialize(JSON_RESPONSE_USER,UserEntity.class);
 
-        assertThat(userEntity.getID(),is(0));
+        assertThat(userEntity.getID(),is("User"));
         assertThat(userEntity.getEmailAddress(),is(equalTo("vpaliy97@gmail.com")));
         assertThat(userEntity.getFirstName(),is("Greg"));
         assertThat(userEntity.getLastName(),is("McKeown"));
@@ -87,7 +87,7 @@ public class SerializerTest {
     public void testDeserializeBookEntityCase() {
         BookEntity bookEntity=bookEntitySerializer.deserialize(JSON_RESPONSE_BOOK,BookEntity.class);
 
-        assertThat(bookEntity.getID(),is(0));
+        assertThat(bookEntity.getID(),is("Book"));
         assertThat(bookEntity.getTitle(),is("Essentialism"));
         assertThat(bookEntity.getAuthor(),is("Greg McKeown"));
         assertThat(bookEntity.getNumberOfPages(),is(300));

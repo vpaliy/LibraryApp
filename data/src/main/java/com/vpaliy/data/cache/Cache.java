@@ -1,6 +1,5 @@
 package com.vpaliy.data.cache;
 
-
 /**
  * Created by vpaliyX on 2/27/17.
  *
