@@ -7,9 +7,10 @@ import com.vpaliy.data.entity.BookEntity;
 import java.util.Collection;
 import java.util.List;
 
-import io.reactivex.Observable;
+import rx.Observable;
 
 public class BookRemoteSource extends DataSource<BookEntity> {
+
     @Override
     public void deleteById(String ID) {
 

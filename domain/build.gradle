@@ -15,6 +15,11 @@ android {
         versionCode config.versionCode
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 configurations {
@@ -29,8 +34,8 @@ sourceSets {
 
 dependencies {
     compile project(':common')
-
     compile libs.RxJava
+    compile libs.RxAndroid
 
     testCompile testLibs.Mockito
     testCompile testLibs.JUnit

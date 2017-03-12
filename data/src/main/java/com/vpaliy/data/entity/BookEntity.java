@@ -2,6 +2,7 @@ package com.vpaliy.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+
 public class BookEntity {
 
     @SerializedName("author")

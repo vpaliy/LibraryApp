@@ -18,6 +18,10 @@ android {
         versionCode config.versionCode
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -31,5 +35,8 @@ dependencies {
 
     compile libs.supportAppCompat
     compile libs.gson
+    compile libs.RxJava
+    compile libs.RxAndroid
+
 
 }

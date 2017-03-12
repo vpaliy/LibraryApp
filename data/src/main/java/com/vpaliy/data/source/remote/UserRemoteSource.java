@@ -6,7 +6,7 @@ import com.vpaliy.data.entity.UserEntity;
 import java.util.Collection;
 import java.util.List;
 
-import io.reactivex.Observable;
+import rx.Observable;
 
 public class UserRemoteSource extends DataSource<UserEntity>{
 

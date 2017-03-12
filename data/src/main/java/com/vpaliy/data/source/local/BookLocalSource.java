@@ -6,7 +6,7 @@ import com.vpaliy.data.entity.BookEntity;
 import java.util.Collection;
 import java.util.List;
 
-import io.reactivex.Observable;
+import rx.Observable;
 
 public class BookLocalSource extends DataSource<BookEntity> {
 

@@ -4,63 +4,82 @@ import android.support.annotation.NonNull;
 import com.vpaliy.data.source.annotation.Local;
 import com.vpaliy.data.source.annotation.Remote;
 
+import com.vpaliy.data.mapper.Mapper;
 import com.vpaliy.domain.repository.IRepository;
-
 import java.util.Collection;
 import java.util.List;
-import io.reactivex.Observable;
+import rx.Observable;
 
 /**
- * Implementation of IRepository<T>
- * @param <T> entity
+ * Potential implementation of given pattern
+ * @param <Fake> Entity that is located in data layer
+ * @param <Real> Entity that is located in domain layer
  */
 
-public class Repository<T> implements IRepository<T> {
+public class Repository<Fake,Real> implements IRepository<Real> {
 
     /**
      * Local data source
      */
     @Local
-    private DataSource<T> localSource;
+    private DataSource<Fake> localSource;
 
     /**
      * Remote data source
      */
     @Remote
-    private DataSource<T> remoteSource;
+    private DataSource<Fake> remoteSource;
 
-    public Repository(@NonNull @Local DataSource<T> localSource,
-                      @NonNull @Remote DataSource<T> remoteSource) {
+    /**
+     * Maps a fake entity into a real entity
+     */
+    private Mapper<Real,Fake> fakeMapper;
+
+    /**
+     * Maps a real entity into a fake entity
+     */
+    private Mapper<Fake,Real> realMapper;
+
+    public Repository(@NonNull @Local DataSource<Fake> localSource,
+                      @NonNull @Remote DataSource<Fake> remoteSource,
+                      @NonNull Mapper<Real,Fake> fakeMapper,
+                      @NonNull Mapper<Fake,Real> realMapper) {
         this.localSource=localSource;
         this.remoteSource=remoteSource;
+        this.fakeMapper =fakeMapper;
+        this.realMapper=realMapper;
     }
 
     @Override
-    public Observable<List<T>> getList() {
-       return Observable.concat(localSource.getList(), remoteSource.getList());
+    public Observable<List<Real>> getList() {
+        return Observable.concat
+                (localSource.getList().flatMap(fakes->Observable.from(fakeMapper.map(fakes)).toList()),
+                remoteSource.getList().flatMap(fakes->Observable.from(fakeMapper.map(fakes)).toList()));
     }
 
     @Override
-    public Observable<T> findById(String ID) {
-        return Observable.concat(localSource.findById(ID),remoteSource.findById(ID));
+    public Observable<Real> findById(String ID) {
+        return Observable.concat
+            (localSource.findById(ID).map(fakeMapper::map),
+            remoteSource.findById(ID).map(fakeMapper::map));
     }
 
     @Override
-    public void update(T item) {
-        localSource.update(item);
-        remoteSource.update(item);
+    public void update(Real item) {
+        localSource.update(realMapper.map(item));
+        remoteSource.update(realMapper.map(item));
     }
 
     @Override
-    public void delete(T item) {
-        localSource.delete(item);
-        remoteSource.delete(item);
+    public void delete(Real item) {
+        localSource.delete(realMapper.map(item));
+        remoteSource.delete(realMapper.map(item));
     }
 
     @Override
-    public void add(T item) {
-        localSource.add(item);
-        remoteSource.add(item);
+    public void add(Real item) {
+        localSource.add(realMapper.map(item));
+        remoteSource.add(realMapper.map(item));
     }
 
     @Override
@@ -76,8 +95,8 @@ public class Repository<T> implements IRepository<T> {
     }
 
     @Override
-    public void add(Collection<T> collection) {
-        localSource.add(collection);
-        remoteSource.add(collection);
+    public void add(Collection<Real> collection) {
+       localSource.add(realMapper.map(collection));
+       remoteSource.add(realMapper.map(collection));
     }
 }

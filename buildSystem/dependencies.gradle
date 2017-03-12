@@ -25,8 +25,8 @@ ext {
     daggerVersion = '2.8'
     butterKnifeVersion = '7.0.1'
     supportVersion  = "25.1.0"
-    rxJavaVersion = '2.0.2'
-    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '1.1.8'
+    rxAndroidVersion = '1.2.1'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
     gsonVersion = '2.3'
@@ -54,8 +54,8 @@ ext {
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${supportVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}"
     ]
 
@@ -71,7 +71,8 @@ ext {
     domainDependencies = [
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-            RxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             arrow:              "com.fernandocejas:arrow:${arrowVersion}"
     ]
 
@@ -90,8 +91,8 @@ ext {
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"

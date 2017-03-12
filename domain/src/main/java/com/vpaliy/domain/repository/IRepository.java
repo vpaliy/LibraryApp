@@ -4,10 +4,11 @@ package com.vpaliy.domain.repository;
 import java.util.Collection;
 import java.util.List;
 
-import io.reactivex.Observable;
+import rx.Observable;
 
 /**
- * Dependency inversion principle
+ * Basically, this interface is an application of dependency inversion principle
+ * Thus the domain layer does not care about the database.
  * @param <T> Specific business object
  */
 
