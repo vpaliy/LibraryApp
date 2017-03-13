@@ -1,6 +1,7 @@
 package com.vpaliy.domain.interactor;
 
-public abstract class UseCase<R extends UseCase.Request>{
+import rx.Observable;
 
-    public interface Request{}
+public interface  UseCase<T,R>{
+    Observable<T> execute(R request);
 }

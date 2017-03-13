@@ -1,4 +1,13 @@
 package com.vpaliy.domain.interactor;
 
-public class EditUser extends UseCase {
+import com.vpaliy.domain.model.UserModel;
+
+import rx.Observable;
+
+public class EditUser implements UseCase<UserModel,Void> {
+
+    @Override
+    public Observable<UserModel> execute(Void request) {
+        return null;
+    }
 }
