@@ -10,7 +10,10 @@ import java.util.List;
 public interface UsersView extends View<UserListPresenter> {
 
     void attachPresenter(@NonNull UserListPresenter presenter);
+    void showLoadingError();
+    void setLoadingIndicator(boolean isVisible);
     void showUserList(@NonNull List<UserModel> userModelList);
     void appendUserList(@NonNull List<UserModel> userModelList);
+
 
 }

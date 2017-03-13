@@ -11,6 +11,8 @@ import java.util.List;
 public interface BooksView extends View<BookListPresenter>{
 
     void attachPresenter(@NonNull BookListPresenter presenter) ;
+    void showLoadingError();
+    void setLoadingIndicator(boolean isVisible);
     void showBookList(@NonNull List<BookModel> bookModelList);
     void appendBookList(@NonNull List<BookModel> bookModelList);
 
