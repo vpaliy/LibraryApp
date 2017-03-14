@@ -1,7 +1,7 @@
 package com.vpaliy.data.source.remote;
 
 
-import com.vpaliy.data.DataSource;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.entity.BookEntity;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.vpaliy.data;
+package com.vpaliy.data.source;
 
 import com.vpaliy.domain.repository.IRepository;
 

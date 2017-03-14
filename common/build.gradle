@@ -3,6 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 def config = rootProject.ext.configuration
+def libs=rootProject.ext.commonDependencies
 
 android {
     compileSdkVersion config.compileSdkVersion
@@ -18,6 +19,11 @@ android {
 
 dependencies {
     def testLibs=rootProject.ext.dataTestDependencies
+
+    compile libs.RxJava
+    compile libs.RxAndroid
+    compile libs.supportDesign
+    compile libs.supportAppCompat
 
     testCompile testLibs.mockito
     testCompile testLibs.jUnit

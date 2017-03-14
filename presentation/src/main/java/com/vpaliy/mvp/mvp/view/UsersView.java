@@ -1,7 +1,6 @@
 package com.vpaliy.mvp.mvp.view;
 
 import android.support.annotation.NonNull;
-
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.mvp.View;
 import com.vpaliy.mvp.mvp.presenter.UserListPresenter;
@@ -13,7 +12,7 @@ public interface UsersView extends View<UserListPresenter> {
     void showLoadingError();
     void setLoadingIndicator(boolean isVisible);
     void showUserList(@NonNull List<UserModel> userModelList);
+    void showAddUser();
     void appendUserList(@NonNull List<UserModel> userModelList);
-
 
 }

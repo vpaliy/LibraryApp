@@ -1,6 +1,6 @@
 package com.vpaliy.data.source.remote;
 
-import com.vpaliy.data.DataSource;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.entity.UserEntity;
 
 import java.util.Collection;

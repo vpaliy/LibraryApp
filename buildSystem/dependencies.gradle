@@ -105,6 +105,16 @@ ext {
             robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
     ]
 
+    /**Common  module **/
+    commonDependencies = [
+            supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
+            supportDesign:       "com.android.support:design:${supportVersion}",
+            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
+    ]
+
 
     developmentDependencies = [
             leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",

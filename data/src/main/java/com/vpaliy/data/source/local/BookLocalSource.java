@@ -1,7 +1,7 @@
 package com.vpaliy.data.source.local;
 
 
-import com.vpaliy.data.DataSource;
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.entity.BookEntity;
 import java.util.Collection;
 import java.util.List;

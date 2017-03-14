@@ -1,6 +1,8 @@
-package com.vpaliy.data;
+package com.vpaliy.data.repository;
 
 import android.support.annotation.NonNull;
+
+import com.vpaliy.data.source.DataSource;
 import com.vpaliy.data.source.annotation.Local;
 import com.vpaliy.data.source.annotation.Remote;
 

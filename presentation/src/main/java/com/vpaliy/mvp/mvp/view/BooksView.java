@@ -14,6 +14,7 @@ public interface BooksView extends View<BookListPresenter>{
     void showLoadingError();
     void setLoadingIndicator(boolean isVisible);
     void showBookList(@NonNull List<BookModel> bookModelList);
+    void showAddBook();
     void appendBookList(@NonNull List<BookModel> bookModelList);
 
 }
