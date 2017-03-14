@@ -1,19 +1,22 @@
 package com.vpaliy.domain.interactor;
 
-import com.vpaliy.domain.model.UserModel;
+import android.support.annotation.NonNull;
+
 import com.vpaliy.domain.repository.IRepository;
 
 import rx.Observable;
 
-public class GetUserDetails implements UseCase<UserModel,GetUserDetails.Params>{
 
-    private final IRepository<UserModel> iRepository;
+public class GetModelDetails<T> implements UseCase<T,GetModelDetails.Params> {
 
-    public GetUserDetails(IRepository<UserModel> iRepository) {
+    @NonNull
+    private final IRepository<T> iRepository;
+
+    public GetModelDetails(@NonNull IRepository<T> iRepository) {
         this.iRepository=iRepository;
     }
 
-    public Observable<UserModel> execute(Params params) {
+    public Observable<T> execute(@NonNull Params params) {
         return iRepository.findById(params.ID);
     }
 
@@ -26,4 +29,5 @@ public class GetUserDetails implements UseCase<UserModel,GetUserDetails.Params>{
         }
 
     }
+
 }

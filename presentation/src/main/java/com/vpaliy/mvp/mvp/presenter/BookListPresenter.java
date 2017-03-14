@@ -3,9 +3,9 @@ package com.vpaliy.mvp.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.common.scheduler.SchedulerProvider;
-import com.vpaliy.domain.interactor.AddBook;
-import com.vpaliy.domain.interactor.DeleteBook;
-import com.vpaliy.domain.interactor.GetBookList;
+import com.vpaliy.domain.interactor.AddUseCase;
+import com.vpaliy.domain.interactor.DeleteUseCase;
+import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.BookModel;
 import com.vpaliy.mvp.mvp.Presenter;
 import com.vpaliy.mvp.mvp.view.BooksView;
@@ -14,20 +14,20 @@ import java.util.List;
 public class BookListPresenter implements Presenter<BooksView> {
 
     /* Use cases */
-    private final GetBookList bookListUseCase;
-    private final AddBook addUseCase;
-    private final DeleteBook deleteBookUseCase;
+    private final GetListUseCase<BookModel> getListUseCase;
+    private final AddUseCase<BookModel> addUseCase;
+    private final DeleteUseCase<BookModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
     private BooksView view;
 
-    public BookListPresenter(@NonNull GetBookList bookListUseCase,
-                             @NonNull AddBook addUseCase,
-                             @NonNull DeleteBook deleteBookUseCase,
+    public BookListPresenter(@NonNull GetListUseCase<BookModel> getListUseCase,
+                             @NonNull AddUseCase<BookModel> addUseCase,
+                             @NonNull DeleteUseCase<BookModel> deleteBookUseCase,
                              @NonNull SchedulerProvider schedulerProvider) {
-        this.bookListUseCase=bookListUseCase;
+        this.getListUseCase=getListUseCase;
         this.addUseCase=addUseCase;
-        this.deleteBookUseCase=deleteBookUseCase;
+        this.deleteUseCase=deleteBookUseCase;
         this.schedulerProvider=schedulerProvider;
     }
 
@@ -43,7 +43,7 @@ public class BookListPresenter implements Presenter<BooksView> {
     }
 
     private void initialize() {
-        bookListUseCase.execute(null)
+        getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())
                 .subscribe(this::processData,
                            this::errorHasOccurred,
@@ -59,8 +59,12 @@ public class BookListPresenter implements Presenter<BooksView> {
     }
 
     public void addBook(@NonNull BookModel bookModel){
-        //addUseCase.execute(bookModel);
+        addUseCase.execute(bookModel);
         view.showAddBook();
+    }
+
+    public void deleteBook(@NonNull BookModel bookModel) {
+        deleteUseCase.execute(bookModel);
     }
 
     @Override

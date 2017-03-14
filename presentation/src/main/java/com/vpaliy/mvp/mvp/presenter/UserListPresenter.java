@@ -3,9 +3,9 @@ package com.vpaliy.mvp.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.common.scheduler.SchedulerProvider;
-import com.vpaliy.domain.interactor.AddUser;
-import com.vpaliy.domain.interactor.DeleteUser;
-import com.vpaliy.domain.interactor.GetUserList;
+import com.vpaliy.domain.interactor.AddUseCase;
+import com.vpaliy.domain.interactor.DeleteUseCase;
+import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.mvp.Presenter;
 import com.vpaliy.mvp.mvp.view.UsersView;
@@ -15,20 +15,20 @@ import java.util.List;
 public class UserListPresenter implements Presenter<UsersView>{
 
     /* Use cases */
-    private final GetUserList userListUseCase;
-    private final AddUser addUseCase;
-    private final DeleteUser deleteUserUseCase;
+    private final GetListUseCase<UserModel> getListUseCase;
+    private final AddUseCase<UserModel> addUseCase;
+    private final DeleteUseCase<UserModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
     private UsersView view;
 
-    public UserListPresenter(@NonNull GetUserList userListUseCase,
-                             @NonNull AddUser addUseCase,
-                             @NonNull DeleteUser deleteUserUseCase,
+    public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
+                             @NonNull AddUseCase<UserModel> addUseCase,
+                             @NonNull DeleteUseCase<UserModel> deleteUseCase,
                              @NonNull SchedulerProvider schedulerProvider) {
-        this.userListUseCase=userListUseCase;
+        this.getListUseCase=getListUseCase;
         this.addUseCase=addUseCase;
-        this.deleteUserUseCase=deleteUserUseCase;
+        this.deleteUseCase=deleteUseCase;
         this.schedulerProvider=schedulerProvider;
     }
 
@@ -49,7 +49,7 @@ public class UserListPresenter implements Presenter<UsersView>{
     }
 
     private void initialize() {
-        userListUseCase.execute(null)
+        getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())
                 .subscribe(this::processData,
                            this::errorHasOccurred,
@@ -65,15 +65,15 @@ public class UserListPresenter implements Presenter<UsersView>{
     }
 
     public void deleteUser(@NonNull UserModel userModel) {
-        //deleteUseCase.execute(userModel);
+        deleteUseCase.execute(userModel);
     }
 
     public void deleteUserList(@NonNull List<UserModel> userModelList) {
         //deleteUseCase.execute(userModelList);
     }
 
-    public void addUser(@NonNull AddUser addUser) {
-        //addUseCase.execute(addUser);
+    public void addUser(@NonNull UserModel userModel) {
+        addUseCase.execute(userModel);
         view.showAddUser();
 
     }
