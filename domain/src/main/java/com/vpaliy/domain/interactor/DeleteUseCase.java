@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.vpaliy.domain.repository.IRepository;
 
-public class DeleteUseCase<T> {
+public class DeleteUseCase<T> implements UseCase<T>  {
 
     @NonNull
     private final IRepository<T> iRepository;

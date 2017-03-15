@@ -2,6 +2,6 @@ package com.vpaliy.mvp.mvp;
 
 import android.support.annotation.NonNull;
 
-public interface View<P extends Presenter<? extends View>> {
+public interface BaseView<P extends BasePresenter<? extends BaseView>> {
     void attachPresenter(@NonNull P presenter);
 }

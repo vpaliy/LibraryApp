@@ -6,7 +6,7 @@ import java.util.List;
 import rx.Observable;
 
 
-public class GetListUseCase<T>  {
+public class GetListUseCase<T> implements UseCase<T>  {
 
     @NonNull
     private final IRepository<T> iRepository;

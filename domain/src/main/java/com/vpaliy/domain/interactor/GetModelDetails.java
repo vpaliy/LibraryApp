@@ -7,7 +7,7 @@ import com.vpaliy.domain.repository.IRepository;
 import rx.Observable;
 
 
-public class GetModelDetails<T> implements UseCase<T,GetModelDetails.Params> {
+public class GetModelDetails<T> implements UseCase<T> {
 
     @NonNull
     private final IRepository<T> iRepository;
@@ -16,18 +16,9 @@ public class GetModelDetails<T> implements UseCase<T,GetModelDetails.Params> {
         this.iRepository=iRepository;
     }
 
-    public Observable<T> execute(@NonNull Params params) {
-        return iRepository.findById(params.ID);
+    public Observable<T> execute(@NonNull String ID) {
+        return iRepository.findById(ID);
     }
 
-    public static class Params {
-
-        private final  String ID;
-
-        public Params(String ID) {
-            this.ID=ID;
-        }
-
-    }
 
 }

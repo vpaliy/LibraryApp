@@ -1,18 +1,18 @@
 package com.vpaliy.mvp.mvp.presenter;
 
 import android.support.annotation.NonNull;
-
 import com.vpaliy.common.scheduler.SchedulerProvider;
 import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.UserModel;
-import com.vpaliy.mvp.mvp.Presenter;
-import com.vpaliy.mvp.mvp.view.UsersView;
+import java.util.Collection;
 import java.util.List;
 
+import static com.vpaliy.mvp.mvp.contract.UserListContract.*;
 
-public class UserListPresenter implements Presenter<UsersView>{
+
+public class UserListPresenter implements Presenter {
 
     /* Use cases */
     private final GetListUseCase<UserModel> getListUseCase;
@@ -20,7 +20,7 @@ public class UserListPresenter implements Presenter<UsersView>{
     private final DeleteUseCase<UserModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
-    private UsersView view;
+    private View view;
 
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
                              @NonNull AddUseCase<UserModel> addUseCase,
@@ -32,20 +32,35 @@ public class UserListPresenter implements Presenter<UsersView>{
         this.schedulerProvider=schedulerProvider;
     }
 
-    @Override
-    public void onStart() {
-
-    }
 
     @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
-    public void onAttachView(@NonNull UsersView view) {
+    public void onAttachView(@NonNull View view) {
         this.view=view;
-        initialize();
+    }
+
+    @Override
+    public void add(@NonNull UserModel user) {
+
+    }
+
+    @Override
+    public void delete(@NonNull UserModel user) {
+
+    }
+
+    @Override
+    public void delete(Collection<UserModel> users) {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
     }
 
     private void initialize() {
@@ -64,22 +79,5 @@ public class UserListPresenter implements Presenter<UsersView>{
         view.showLoadingError();
     }
 
-    public void deleteUser(@NonNull UserModel userModel) {
-        deleteUseCase.execute(userModel);
-    }
 
-    public void deleteUserList(@NonNull List<UserModel> userModelList) {
-        //deleteUseCase.execute(userModelList);
-    }
-
-    public void addUser(@NonNull UserModel userModel) {
-        addUseCase.execute(userModel);
-        view.showAddUser();
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
 }

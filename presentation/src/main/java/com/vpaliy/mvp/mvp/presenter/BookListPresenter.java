@@ -7,11 +7,12 @@ import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.BookModel;
-import com.vpaliy.mvp.mvp.Presenter;
-import com.vpaliy.mvp.mvp.view.BooksView;
+import java.util.Collection;
 import java.util.List;
 
-public class BookListPresenter implements Presenter<BooksView> {
+import static com.vpaliy.mvp.mvp.contract.BookListContract.*;
+
+public class BookListPresenter implements Presenter {
 
     /* Use cases */
     private final GetListUseCase<BookModel> getListUseCase;
@@ -19,7 +20,7 @@ public class BookListPresenter implements Presenter<BooksView> {
     private final DeleteUseCase<BookModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
-    private BooksView view;
+    private View view;
 
     public BookListPresenter(@NonNull GetListUseCase<BookModel> getListUseCase,
                              @NonNull AddUseCase<BookModel> addUseCase,
@@ -31,15 +32,36 @@ public class BookListPresenter implements Presenter<BooksView> {
         this.schedulerProvider=schedulerProvider;
     }
 
+
     @Override
-    public void onResume() {
+    public void onAttachView(@NonNull View view) {
+        this.view=view;
+        start();
+    }
+
+    @Override
+    public void add(@NonNull BookModel book) {
 
     }
 
     @Override
-    public void onAttachView(@NonNull final BooksView view) {
-        this.view=view;
-        initialize();
+    public void delete(@NonNull BookModel book) {
+
+    }
+
+    @Override
+    public void delete(@NonNull Collection<BookModel> books) {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void start() {
+
     }
 
     private void initialize() {
@@ -67,13 +89,4 @@ public class BookListPresenter implements Presenter<BooksView> {
         deleteUseCase.execute(bookModel);
     }
 
-    @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
-    public void onStart() {
-
-    }
 }

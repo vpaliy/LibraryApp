@@ -6,7 +6,7 @@ import com.vpaliy.domain.repository.IRepository;
 
 import java.util.Collection;
 
-public class AddUseCase<T> {
+public class AddUseCase<T> implements UseCase<T>  {
 
     @NonNull
     private final IRepository<T> iRepository;
