@@ -64,6 +64,11 @@ public class BookListPresenter implements Presenter {
 
     }
 
+    @Override
+    public void switchToUsers() {
+        view.switchToUsers();
+    }
+
     private void initialize() {
         getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())

@@ -19,6 +19,7 @@ public interface  UserListContract {
         void showLoadingError();
         void setLoadingIndicator(boolean isVisible);
         void showUserList(@NonNull List<UserModel> userModelList);
+        void switchToBooks();
         void showAddUser();
         void showDeleteUser();
         void appendUserList(@NonNull List<UserModel> userModelList);
@@ -32,6 +33,7 @@ public interface  UserListContract {
         void stop();
 
         /* UI events */
+        void switchToBooks();
         void delete(@NonNull UserModel user);
         void delete(Collection<UserModel> users);
         void add(@NonNull UserModel user);
