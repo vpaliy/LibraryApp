@@ -37,6 +37,7 @@ dependencies {
     compile libs.gson
     compile libs.RxJava
     compile libs.RxAndroid
+    compile libs.SQLBrite
 
 
 }

@@ -32,6 +32,17 @@ public class UsersFragment extends Fragment
     @BindView(R.id.recycleView)
     private RecyclerView userList;
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.stop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
 
     @Nullable
     @Override

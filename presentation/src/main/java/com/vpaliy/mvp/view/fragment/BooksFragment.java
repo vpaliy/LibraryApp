@@ -31,6 +31,18 @@ public class BooksFragment extends Fragment
     private RecyclerView bookList;
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.stop();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
