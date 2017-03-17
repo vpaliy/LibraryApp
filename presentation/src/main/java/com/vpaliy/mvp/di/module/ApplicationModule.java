@@ -3,8 +3,9 @@ package com.vpaliy.mvp.di.module;
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Singleton;
+import com.squareup.otto.Bus;
 
+import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
@@ -23,6 +24,9 @@ public class ApplicationModule {
         return application;
     }
 
-
+    @Singleton
+    public Bus provideEventBus() {
+        return new Bus();
+    }
 
 }

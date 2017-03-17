@@ -36,6 +36,7 @@ dependencies {
     compile project(':data')
     compile project(':common')
 
+    compile libs.ottoEventBus
     compile libs.butterKnife
     compile libs.recyclerView
     compile libs.supportDesign
