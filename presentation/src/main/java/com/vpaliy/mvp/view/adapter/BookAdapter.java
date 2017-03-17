@@ -43,6 +43,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>{
         }
     }
 
+    //TODO apply filter
+    public void appendData(@NonNull List<BookModel> books) {
+        if(!books.isEmpty()) {
+            data.addAll(books);
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public int getItemCount() {
         return data.size();

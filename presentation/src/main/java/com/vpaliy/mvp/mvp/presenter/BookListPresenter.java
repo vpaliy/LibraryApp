@@ -10,6 +10,8 @@ import com.vpaliy.domain.model.BookModel;
 import java.util.Collection;
 import java.util.List;
 
+import rx.subscriptions.CompositeSubscription;
+
 import static com.vpaliy.mvp.mvp.contract.BookListContract.*;
 
 public class BookListPresenter implements Presenter {
@@ -20,6 +22,7 @@ public class BookListPresenter implements Presenter {
     private final DeleteUseCase<BookModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
+    private CompositeSubscription subscriptions;
     private View view;
 
     public BookListPresenter(@NonNull GetListUseCase<BookModel> getListUseCase,
@@ -30,6 +33,7 @@ public class BookListPresenter implements Presenter {
         this.addUseCase=addUseCase;
         this.deleteUseCase=deleteBookUseCase;
         this.schedulerProvider=schedulerProvider;
+        this.subscriptions=new CompositeSubscription();
     }
 
 
@@ -56,25 +60,29 @@ public class BookListPresenter implements Presenter {
 
     @Override
     public void stop() {
-
+        if(subscriptions.hasSubscriptions()) {
+            subscriptions.unsubscribe();
+            subscriptions.clear();
+        }
     }
 
     @Override
     public void start() {
-
+        view.setLoadingIndicator(true);
     }
 
     @Override
     public void switchToUsers() {
         view.switchToUsers();
+        stop();
     }
 
     private void initialize() {
-        getListUseCase.execute()
+        subscriptions.add(getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())
                 .subscribe(this::processData,
                            this::errorHasOccurred,
-                           ()->view.setLoadingIndicator(false));
+                           ()->view.setLoadingIndicator(false)));
     }
 
     private void processData(@NonNull List<BookModel> modelList) {

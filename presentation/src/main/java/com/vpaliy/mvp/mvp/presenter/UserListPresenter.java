@@ -9,6 +9,8 @@ import com.vpaliy.domain.model.UserModel;
 import java.util.Collection;
 import java.util.List;
 
+import rx.subscriptions.CompositeSubscription;
+
 import static com.vpaliy.mvp.mvp.contract.UserListContract.*;
 
 
@@ -20,6 +22,7 @@ public class UserListPresenter implements Presenter {
     private final DeleteUseCase<UserModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
+    private CompositeSubscription subscriptions;
     private View view;
 
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
@@ -30,6 +33,7 @@ public class UserListPresenter implements Presenter {
         this.addUseCase=addUseCase;
         this.deleteUseCase=deleteUseCase;
         this.schedulerProvider=schedulerProvider;
+        this.subscriptions=new CompositeSubscription();
     }
 
 
@@ -40,12 +44,14 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void add(@NonNull UserModel user) {
-
+        addUseCase.execute(user);
+        view.showAddUser();
     }
 
     @Override
     public void delete(@NonNull UserModel user) {
-
+        deleteUseCase.execute(user);
+        view.showDeleteUser();
     }
 
     @Override
@@ -55,12 +61,16 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void start() {
-
+        view.setLoadingIndicator(true);
+        initialize();
     }
 
     @Override
     public void stop() {
-
+        if(subscriptions.hasSubscriptions()) {
+            subscriptions.unsubscribe();
+            subscriptions.clear();
+        }
     }
 
     @Override
@@ -69,11 +79,11 @@ public class UserListPresenter implements Presenter {
     }
 
     private void initialize() {
-        getListUseCase.execute()
+        subscriptions.add(getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())
                 .subscribe(this::processData,
-                           this::errorHasOccurred,
-                        ()->view.setLoadingIndicator(false));
+                        this::errorHasOccurred,
+                        ()->view.setLoadingIndicator(false)));
     }
 
     private void processData(@NonNull List<UserModel> userList) {

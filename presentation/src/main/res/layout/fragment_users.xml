@@ -1,7 +1,10 @@
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-</FrameLayout>
 
+    <include
+        layout="@layout/view_recycle">
+    </include>
+
+</RelativeLayout>

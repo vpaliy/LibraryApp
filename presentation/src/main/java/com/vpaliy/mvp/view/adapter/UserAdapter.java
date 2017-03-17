@@ -44,6 +44,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         }
     }
 
+    //TODO apply filter
+    public void appendData(@NonNull List<UserModel> users) {
+        if(!users.isEmpty()) {
+            data.addAll(users);
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public int getItemCount() {
         return data.size();

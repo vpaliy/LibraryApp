@@ -23,7 +23,7 @@ ext {
 
     /* Library versions */
     daggerVersion = '2.8'
-    butterKnifeVersion = '7.0.1'
+    butterKnifeVersion = "8.5.1"
     supportVersion  = "25.1.0"
     rxJavaVersion = '1.1.8'
     rxAndroidVersion = '1.2.1'
@@ -53,6 +53,7 @@ ext {
             supportDesign:       "com.android.support:design:${supportVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${supportVersion}",
             RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
             RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
