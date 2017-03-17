@@ -15,7 +15,6 @@ import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.mvp.contract.UserListContract;
 import com.vpaliy.mvp.view.adapter.UserAdapter;
-
 import java.util.List;
 
 import butterknife.BindView;
