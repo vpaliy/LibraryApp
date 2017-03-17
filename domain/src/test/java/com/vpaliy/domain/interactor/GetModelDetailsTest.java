@@ -13,12 +13,11 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 public class GetModelDetailsTest extends UseCaseTest {
 
     private static final String FAKE_ID="fakeID";
-    private static final GetModelDetails.Params FAKE_PARAMS=new GetModelDetails.Params(FAKE_ID);
 
     @Test
     public void testGetUserDetailsMethod() {
         GetModelDetails<UserModel> getModelDetails=new GetModelDetails<>(mockUserRepository);
-        getModelDetails.execute(FAKE_PARAMS);
+        getModelDetails.execute(FAKE_ID);
 
         verify(mockUserRepository).findById(FAKE_ID);
         verifyNoMoreInteractions(mockUserRepository);
@@ -27,7 +26,7 @@ public class GetModelDetailsTest extends UseCaseTest {
     @Test
     public void testGetBookDetailsMethod() {
         GetModelDetails<BookModel> getModelDetails=new GetModelDetails<>(mockBookRepository);
-        getModelDetails.execute(FAKE_PARAMS);
+        getModelDetails.execute(FAKE_ID);
 
         verify(mockBookRepository).findById(FAKE_ID);
         verifyNoMoreInteractions(mockBookRepository);

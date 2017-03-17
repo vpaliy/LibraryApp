@@ -7,6 +7,8 @@ import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.BookModel;
+import com.vpaliy.mvp.di.scope.ViewScope;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import rx.subscriptions.CompositeSubscription;
 import static com.vpaliy.mvp.mvp.contract.BookListContract.*;
 
 
+@ViewScope
 public class BookListPresenter implements Presenter {
 
     /* Use cases */
