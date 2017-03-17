@@ -36,6 +36,8 @@ dependencies {
     compile project(':common')
     compile libs.RxJava
     compile libs.RxAndroid
+    compile libs.Dagger2
+    annotationProcessor libs.Dagger2Compiler
 
     testCompile testLibs.Mockito
     testCompile testLibs.JUnit

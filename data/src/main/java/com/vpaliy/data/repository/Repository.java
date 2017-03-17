@@ -10,6 +10,10 @@ import com.vpaliy.data.mapper.Mapper;
 import com.vpaliy.domain.repository.IRepository;
 import java.util.Collection;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.Observable;
 
 /**
@@ -18,6 +22,7 @@ import rx.Observable;
  * @param <Real> Entity that is located in domain layer
  */
 
+@Singleton
 public class Repository<Fake,Real> implements IRepository<Real> {
 
     /**
@@ -42,6 +47,7 @@ public class Repository<Fake,Real> implements IRepository<Real> {
      */
     private Mapper<Fake,Real> realMapper;
 
+    @Inject
     public Repository(@NonNull @Local DataSource<Fake> localSource,
                       @NonNull @Remote DataSource<Fake> remoteSource,
                       @NonNull Mapper<Real,Fake> fakeMapper,

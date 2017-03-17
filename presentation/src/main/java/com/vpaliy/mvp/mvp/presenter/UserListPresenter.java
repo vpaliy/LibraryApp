@@ -9,6 +9,8 @@ import com.vpaliy.domain.model.UserModel;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.subscriptions.CompositeSubscription;
 
 import static com.vpaliy.mvp.mvp.contract.UserListContract.*;
@@ -25,6 +27,7 @@ public class UserListPresenter implements Presenter {
     private CompositeSubscription subscriptions;
     private View view;
 
+    @Inject
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
                              @NonNull AddUseCase<UserModel> addUseCase,
                              @NonNull DeleteUseCase<UserModel> deleteUseCase,

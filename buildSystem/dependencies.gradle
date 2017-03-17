@@ -49,10 +49,10 @@ ext {
 
     /** Presentation module **/
     presentationDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
             supportDesign:       "com.android.support:design:${supportVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
+            Dagger2Compiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            Dagger2:             "com.google.dagger:dagger:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${supportVersion}",
@@ -71,6 +71,8 @@ ext {
 
     /** Domain module **/
     domainDependencies = [
+            Dagger2Compiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            Dagger2:             "com.google.dagger:dagger:${daggerVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
             RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
@@ -87,10 +89,10 @@ ext {
 
     /** Data module **/
     dataDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            Dagger2Compiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            Dagger2:             "com.google.dagger:dagger:${daggerVersion}",
             supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
             supportDesign:       "com.android.support:design:${supportVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
             okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",

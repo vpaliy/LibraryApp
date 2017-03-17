@@ -10,9 +10,12 @@ import com.vpaliy.domain.model.BookModel;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.subscriptions.CompositeSubscription;
 
 import static com.vpaliy.mvp.mvp.contract.BookListContract.*;
+
 
 public class BookListPresenter implements Presenter {
 
@@ -25,6 +28,7 @@ public class BookListPresenter implements Presenter {
     private CompositeSubscription subscriptions;
     private View view;
 
+    @Inject
     public BookListPresenter(@NonNull GetListUseCase<BookModel> getListUseCase,
                              @NonNull AddUseCase<BookModel> addUseCase,
                              @NonNull DeleteUseCase<BookModel> deleteBookUseCase,

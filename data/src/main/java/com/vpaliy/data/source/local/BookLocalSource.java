@@ -14,12 +14,16 @@ import com.vpaliy.data.entity.BookEntity;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.Observable;
 import rx.functions.Func1;
 
 import static com.vpaliy.data.source.local.PersistenceContract.BookEntry;
 import static com.vpaliy.common.Preconditions.checkNotNull;
 
+@Singleton
 public class BookLocalSource extends DataSource<BookEntity> {
 
     @NonNull
@@ -28,7 +32,8 @@ public class BookLocalSource extends DataSource<BookEntity> {
     @NonNull
     private Func1<Cursor,BookEntity> mapper;
 
-    private BookLocalSource(@NonNull Context context,
+    @Inject
+    public BookLocalSource(@NonNull Context context,
                             @NonNull SchedulerProvider schedulerProvider) {
         checkNotNull(context);
         checkNotNull(schedulerProvider);
@@ -155,7 +160,4 @@ public class BookLocalSource extends DataSource<BookEntity> {
     public void clear() {
         database.delete(BookEntry.TABLE_NAME,null);
     }
-
-
-
 }

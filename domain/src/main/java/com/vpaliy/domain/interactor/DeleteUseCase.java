@@ -4,11 +4,14 @@ import android.support.annotation.NonNull;
 
 import com.vpaliy.domain.repository.IRepository;
 
+import javax.inject.Inject;
+
 public class DeleteUseCase<T> implements UseCase<T>  {
 
     @NonNull
     private final IRepository<T> iRepository;
 
+    @Inject
     public DeleteUseCase(@NonNull IRepository<T> iRepository) {
         this.iRepository=iRepository;
     }

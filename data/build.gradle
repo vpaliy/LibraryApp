@@ -38,6 +38,8 @@ dependencies {
     compile libs.RxJava
     compile libs.RxAndroid
     compile libs.SQLBrite
+    compile libs.Dagger2
+    annotationProcessor libs.Dagger2Compiler
 
 
 }

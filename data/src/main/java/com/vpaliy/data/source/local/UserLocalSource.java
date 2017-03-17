@@ -14,6 +14,7 @@ import com.vpaliy.data.entity.UserEntity;
 
 import java.util.Collection;
 import java.util.List;
+import javax.inject.Inject;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -28,7 +29,8 @@ public class UserLocalSource extends DataSource<UserEntity> {
     @NonNull
     private Func1<Cursor,UserEntity> mapper;
 
-    private UserLocalSource(@NonNull Context context,
+    @Inject
+    public UserLocalSource(@NonNull Context context,
                             @NonNull SchedulerProvider schedulerProvider) {
         checkNotNull(context);
         checkNotNull(schedulerProvider);
