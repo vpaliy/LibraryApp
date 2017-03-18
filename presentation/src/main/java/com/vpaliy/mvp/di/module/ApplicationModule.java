@@ -20,12 +20,13 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    public Context provideContext() {
+    Context provideContext() {
         return application;
     }
 
     @Singleton
-    public Bus provideEventBus() {
+    @Provides
+    Bus provideEventBus() {
         return new Bus();
     }
 

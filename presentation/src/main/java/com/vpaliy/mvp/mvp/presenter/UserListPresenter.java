@@ -44,6 +44,7 @@ public class UserListPresenter implements Presenter {
 
 
     @Override
+    @Inject
     public void onAttachView(@NonNull View view) {
         this.view=view;
     }

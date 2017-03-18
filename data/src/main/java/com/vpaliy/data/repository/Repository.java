@@ -9,6 +9,7 @@ import com.vpaliy.data.source.annotation.Remote;
 import com.vpaliy.data.mapper.Mapper;
 import com.vpaliy.domain.repository.IRepository;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,54 +41,48 @@ public class Repository<Fake,Real> implements IRepository<Real> {
     /**
      * Maps a fake entity into a real entity
      */
-    private Mapper<Real,Fake> fakeMapper;
+    private Mapper<Real,Fake> mapper;
 
-    /**
-     * Maps a real entity into a fake entity
-     */
-    private Mapper<Fake,Real> realMapper;
 
     @Inject
     public Repository(@NonNull @Local DataSource<Fake> localSource,
                       @NonNull @Remote DataSource<Fake> remoteSource,
-                      @NonNull Mapper<Real,Fake> fakeMapper,
-                      @NonNull Mapper<Fake,Real> realMapper) {
+                      @NonNull Mapper<Real,Fake> mapper) {
         this.localSource=localSource;
         this.remoteSource=remoteSource;
-        this.fakeMapper =fakeMapper;
-        this.realMapper=realMapper;
+        this.mapper=mapper;
     }
 
     @Override
     public Observable<List<Real>> getList() {
-        return Observable.concat
-                (localSource.getList().flatMap(fakes->Observable.from(fakeMapper.map(fakes)).toList()),
-                remoteSource.getList().flatMap(fakes->Observable.from(fakeMapper.map(fakes)).toList()));
+        return Observable.concat(
+                localSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()),
+                remoteSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()));
     }
 
     @Override
     public Observable<Real> findById(String ID) {
-        return Observable.concat
-            (localSource.findById(ID).map(fakeMapper::map),
-            remoteSource.findById(ID).map(fakeMapper::map));
+        return Observable.concat(
+                localSource.findById(ID).map(mapper::map),
+                remoteSource.findById(ID).map(mapper::map));
     }
 
     @Override
     public void update(Real item) {
-        localSource.update(realMapper.map(item));
-        remoteSource.update(realMapper.map(item));
+        localSource.update(mapper.reverseMap(item));
+        remoteSource.update(mapper.reverseMap(item));
     }
 
     @Override
     public void delete(Real item) {
-        localSource.delete(realMapper.map(item));
-        remoteSource.delete(realMapper.map(item));
+        localSource.delete(mapper.reverseMap(item));
+        remoteSource.delete(mapper.reverseMap(item));
     }
 
     @Override
     public void add(Real item) {
-        localSource.add(realMapper.map(item));
-        remoteSource.add(realMapper.map(item));
+        localSource.add(mapper.reverseMap(item));
+        remoteSource.add(mapper.reverseMap(item));
     }
 
     @Override
@@ -104,7 +99,8 @@ public class Repository<Fake,Real> implements IRepository<Real> {
 
     @Override
     public void add(Collection<Real> collection) {
-       localSource.add(realMapper.map(collection));
-       remoteSource.add(realMapper.map(collection));
+        LinkedList<Real> result=new LinkedList<>(collection);
+        localSource.add(mapper.reverseMap(result));
+        remoteSource.add(mapper.reverseMap(result));
     }
 }

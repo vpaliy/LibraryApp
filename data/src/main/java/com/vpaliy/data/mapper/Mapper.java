@@ -1,8 +1,6 @@
 package com.vpaliy.data.mapper;
 
 import android.support.annotation.NonNull;
-
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,10 +24,19 @@ public interface Mapper<To,From> {
      */
     @NonNull List<To> map(@NonNull List<From> list);
 
+
     /**
-     * Collection mapper
-     * @param collection of items that will be mapped
-     * @return collection of transformed items
+     * Reverse single mapper
+     * @param to entity which will be mapped
+     * @return result
      */
-    @NonNull Collection<To> map(@NonNull Collection<From> collection);
+    @NonNull From reverseMap(@NonNull To to);
+
+    /**
+     * Reverse list mapper
+     * @param list that will be mapped
+     * @return list of transformed entities
+     */
+    @NonNull List<From> reverseMap(@NonNull List<To> list);
+
 }

@@ -42,8 +42,9 @@ dependencies {
     compile libs.supportDesign
     compile libs.supportAppCompat
     compile libs.Dagger2
-    annotationProcessor libs.Dagger2Compiler
+    apt libs.Dagger2Compiler
     annotationProcessor libs.butterKnifeCompiler
+    provided libs.javaxAnnotation
 
     testCompile testLibs.mockito
     testCompile testLibs.espresso
