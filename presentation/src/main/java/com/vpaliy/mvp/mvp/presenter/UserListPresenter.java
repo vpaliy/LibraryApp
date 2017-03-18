@@ -7,12 +7,9 @@ import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.di.scope.ViewScope;
-
 import java.util.Collection;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import rx.subscriptions.CompositeSubscription;
 
 import static com.vpaliy.mvp.mvp.contract.UserListContract.*;
@@ -44,7 +41,6 @@ public class UserListPresenter implements Presenter {
 
 
     @Override
-    @Inject
     public void onAttachView(@NonNull View view) {
         this.view=view;
     }
@@ -69,7 +65,6 @@ public class UserListPresenter implements Presenter {
     @Override
     public void start() {
         view.setLoadingIndicator(true);
-        initialize();
     }
 
     @Override

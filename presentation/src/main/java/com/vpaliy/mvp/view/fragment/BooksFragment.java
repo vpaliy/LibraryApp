@@ -7,15 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.vpaliy.domain.model.BookModel;
+import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
+import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
+import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.BookListContract;
 import com.vpaliy.mvp.view.adapter.BookAdapter;
-
 import java.util.List;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,6 +34,12 @@ public class BooksFragment extends Fragment
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeInjector();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         presenter.start();
@@ -45,8 +53,10 @@ public class BooksFragment extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        presenter.onAttachView(this);
+        return inflater.inflate(R.layout.fragment_books,container,false);
     }
 
     @Override
@@ -54,6 +64,13 @@ public class BooksFragment extends Fragment
         if(root!=null) {
             ButterKnife.bind(this,root);
         }
+    }
+
+    private void initializeInjector() {
+        DaggerFragmentComponent.builder()
+            .applicationComponent(App.app().provideAppComponent())
+            .presenterModule(new PresenterModule())
+            .build().inject(this);
     }
 
 
@@ -97,6 +114,7 @@ public class BooksFragment extends Fragment
     }
 
     @Override
+    @Inject
     public void attachPresenter(@NonNull Presenter presenter) {
         this.presenter=presenter;
     }

@@ -4,7 +4,6 @@ package com.vpaliy.mvp;
 import android.app.Application;
 import android.support.annotation.NonNull;
 import com.vpaliy.mvp.di.component.ApplicationComponent;
-import com.vpaliy.mvp.di.component.DaggerApplicationComponent;
 import com.vpaliy.mvp.di.module.ApplicationModule;
 import com.vpaliy.mvp.di.module.DataModule;
 import com.vpaliy.mvp.di.module.RepositoryModule;
@@ -27,11 +26,6 @@ public class App extends Application {
     }
 
     private void initializeComponent() {
-        component= DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .dataModule(new DataModule())
-                .repositoryModule(new RepositoryModule())
-                .build();
     }
 
     @NonNull

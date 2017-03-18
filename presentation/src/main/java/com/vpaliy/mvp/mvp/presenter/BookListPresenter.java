@@ -45,10 +45,8 @@ public class BookListPresenter implements Presenter {
 
 
     @Override
-    @Inject
     public void onAttachView(@NonNull View view) {
         this.view=view;
-        start();
     }
 
     @Override
