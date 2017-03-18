@@ -68,9 +68,9 @@ public class BooksFragment extends Fragment
 
     private void initializeInjector() {
         DaggerFragmentComponent.builder()
-            .applicationComponent(App.app().provideAppComponent())
-            .presenterModule(new PresenterModule())
-            .build().inject(this);
+                .applicationComponent(App.app().provideAppComponent())
+                .presenterModule(new PresenterModule())
+                .build().inject(this);
     }
 
 
