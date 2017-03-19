@@ -19,7 +19,6 @@ public interface BookListContract {
         void showLoadingError();
         void setLoadingIndicator(boolean isVisible);
         void showBookList(@NonNull List<BookModel> userModelList);
-        void showAddBook();
         void switchToUsers();
         void showDeleteBook();
         void appendBookList(@NonNull List<BookModel> userModelList);
@@ -36,6 +35,5 @@ public interface BookListContract {
         void switchToUsers();
         void delete(@NonNull BookModel book);
         void delete(Collection<BookModel> books);
-        void add(@NonNull BookModel user);
     }
 }

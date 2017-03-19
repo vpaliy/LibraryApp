@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 import static com.vpaliy.data.source.local.DBConstants.COMMA_SEP;
 import static com.vpaliy.data.source.local.DBConstants.CREATE;
 import static com.vpaliy.data.source.local.DBConstants.INTEGER_TYPE;

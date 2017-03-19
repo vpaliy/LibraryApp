@@ -20,7 +20,6 @@ public class UserListPresenter implements Presenter {
 
     /* Use cases */
     private final GetListUseCase<UserModel> getListUseCase;
-    private final AddUseCase<UserModel> addUseCase;
     private final DeleteUseCase<UserModel> deleteUseCase;
 
     private final SchedulerProvider schedulerProvider;
@@ -29,11 +28,9 @@ public class UserListPresenter implements Presenter {
 
     @Inject
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
-                             @NonNull AddUseCase<UserModel> addUseCase,
                              @NonNull DeleteUseCase<UserModel> deleteUseCase,
                              @NonNull SchedulerProvider schedulerProvider) {
         this.getListUseCase=getListUseCase;
-        this.addUseCase=addUseCase;
         this.deleteUseCase=deleteUseCase;
         this.schedulerProvider=schedulerProvider;
         this.subscriptions=new CompositeSubscription();
@@ -45,11 +42,6 @@ public class UserListPresenter implements Presenter {
         this.view=view;
     }
 
-    @Override
-    public void add(@NonNull UserModel user) {
-        addUseCase.execute(user);
-        view.showAddUser();
-    }
 
     @Override
     public void delete(@NonNull UserModel user) {

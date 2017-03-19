@@ -74,10 +74,6 @@ public class BooksFragment extends Fragment
     }
 
 
-    @Override
-    public void showAddBook() {
-
-    }
 
     @Override
     public void showBookList(@NonNull List<BookModel> userModelList) {

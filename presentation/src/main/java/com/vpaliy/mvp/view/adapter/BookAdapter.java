@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.vpaliy.domain.model.BookModel;
 import com.vpaliy.mvp.view.utils.eventBus.Action;
-
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>{

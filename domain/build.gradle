@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 def config = rootProject.ext.configuration
 def testLibs=rootProject.ext.domainTestDependencies
@@ -22,15 +23,6 @@ android {
 
 }
 
-configurations {
-    provided
-}
-
-sourceSets {
-    main {
-        compileClasspath += configurations.provided
-    }
-}
 
 dependencies {
     compile project(':common')

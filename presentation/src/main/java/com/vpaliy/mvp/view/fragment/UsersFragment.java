@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.squareup.otto.Bus;
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
@@ -30,6 +31,9 @@ public class UsersFragment extends Fragment
 
     private Presenter presenter;
     private UserAdapter adapter;
+
+    @Inject
+    protected Bus eventBus;
 
     @BindView(R.id.recycleView)
     private RecyclerView userList;
@@ -84,10 +88,6 @@ public class UsersFragment extends Fragment
 
     }
 
-    @Override
-    public void showAddUser() {
-
-    }
 
     @Override
     public void showDeleteUser() {
