@@ -4,6 +4,8 @@ import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.di.scope.ViewScope;
 import com.vpaliy.mvp.view.fragment.BookDetailsFragment;
 import com.vpaliy.mvp.view.fragment.BooksFragment;
+import com.vpaliy.mvp.view.fragment.RegisterBookFragment;
+import com.vpaliy.mvp.view.fragment.RegisterUserFragment;
 import com.vpaliy.mvp.view.fragment.UserDetailsFragment;
 import com.vpaliy.mvp.view.fragment.UsersFragment;
 import dagger.Component;
@@ -15,4 +17,6 @@ public interface FragmentComponent {
     void inject(UsersFragment fragment);
     void inject(BookDetailsFragment fragment);
     void inject(UserDetailsFragment fragment);
+    void inject(RegisterBookFragment fragment);
+    void inject(RegisterUserFragment fragment);
 }

@@ -25,5 +25,14 @@ public interface RegisterBookContract {
         void register(@NonNull BookModel model);
     }
 
+    enum Property {
+        AUTHOR,
+        TITLE,
+        AGE_RESTRICTION,
+        GENRE,
+        NUMBER_OF_PAGES,
+        DESCRIPTION
+        
+    }
 
 }

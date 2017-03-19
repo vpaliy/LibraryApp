@@ -53,6 +53,7 @@ public class PresenterModule {
     }
 
     @ViewScope
+    @Provides
     RegisterUserContract.Presenter registerUserPresenter(@NonNull RegisterUserPresenter presenter) {
         return presenter;
     }

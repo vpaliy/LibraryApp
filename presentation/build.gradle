@@ -44,6 +44,7 @@ dependencies {
     compile libs.supportDesign
     compile libs.supportAppCompat
     compile libs.Dagger2
+    compile libs.circleIndicator
     apt libs.Dagger2Compiler
     annotationProcessor libs.butterKnifeCompiler
     provided libs.javaxAnnotation

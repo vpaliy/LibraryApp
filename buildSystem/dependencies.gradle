@@ -35,6 +35,7 @@ ext {
     arrowVersion = '1.0.0'
     SQLBriteVersion="1.1.1"
     ottoEventBusVersion= "1.3.8"
+    circleIndicatorVersion="1.2.2"
 
     /* Testing versions */
     robolectricVersion = '3.1.1'
@@ -60,7 +61,8 @@ ext {
             RxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
             RxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            ottoEventBus:       "com.squareup:otto:${ottoEventBusVersion}"
+            ottoEventBus:       "com.squareup:otto:${ottoEventBusVersion}",
+            circleIndicator:     "me.relex:circleindicator:${circleIndicatorVersion}"
     ]
 
     presentationTestDependencies = [
