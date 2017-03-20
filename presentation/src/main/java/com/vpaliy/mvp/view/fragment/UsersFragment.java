@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.UserListContract;
 import com.vpaliy.mvp.view.adapter.UserAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
-import com.vpaliy.mvp.view.utils.eventBus.Action;
+import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -131,7 +130,7 @@ public class UsersFragment extends Fragment
 
     @Override
     public void switchToBooks() {
-        eventBus.post(new Action<Void>(Constant.SWAP_TO_BOOKS));
+        eventBus.post(new ExternalAction<Void>(Constant.SWAP_TO_BOOKS));
     }
 
     @OnClick(R.id.actionButton)
@@ -141,6 +140,6 @@ public class UsersFragment extends Fragment
 
     @Override
     public void addUserAction() {
-        eventBus.post(new Action<Void>(Constant.ADD_USER));
+        eventBus.post(new ExternalAction<Void>(Constant.ADD_USER));
     }
 }

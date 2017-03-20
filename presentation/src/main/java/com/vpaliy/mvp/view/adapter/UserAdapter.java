@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import com.vpaliy.domain.model.UserModel;
-import com.vpaliy.mvp.view.utils.eventBus.Action;
 
 import java.util.List;
 

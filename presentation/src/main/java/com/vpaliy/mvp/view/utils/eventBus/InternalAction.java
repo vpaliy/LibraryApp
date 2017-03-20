@@ -3,18 +3,18 @@ package com.vpaliy.mvp.view.utils.eventBus;
 
 import android.support.annotation.Nullable;
 
-public class Action<T>{
+public class InternalAction<T> {
 
     @Nullable
     private  T data;
 
     private final int actionCode;
 
-    public Action(final int actionCode) {
+    public InternalAction(final int actionCode) {
         this.actionCode=actionCode;
     }
 
-    public Action(@Nullable T data, int actionCode) {
+    public InternalAction(@Nullable T data, int actionCode) {
         this.data=data;
         this.actionCode=actionCode;
     }

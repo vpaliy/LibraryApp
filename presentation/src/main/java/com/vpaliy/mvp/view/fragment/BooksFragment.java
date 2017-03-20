@@ -18,7 +18,7 @@ import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.BookListContract;
 import com.vpaliy.mvp.view.adapter.BookAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
-import com.vpaliy.mvp.view.utils.eventBus.Action;
+import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 
 import java.util.List;
 import android.support.annotation.NonNull;
@@ -118,17 +118,17 @@ public class BooksFragment extends Fragment
 
     @Override
     public void switchToUsers() {
-        eventBus.post(new Action<Void>(Constant.SWAP_TO_USERS));
+        eventBus.post(new ExternalAction<Void>(Constant.SWAP_TO_USERS));
     }
 
     @OnClick(R.id.actionButton)
-    public void onAddClicked() {
+    public void onAddClicked(View view) {
         presenter.addBook();
     }
 
     @Override
     public void addBookAction() {
-        eventBus.post(new Action<Void>(Constant.ADD_BOOK));
+        eventBus.post(new ExternalAction<Void>(Constant.ADD_BOOK));
     }
 
     @Override

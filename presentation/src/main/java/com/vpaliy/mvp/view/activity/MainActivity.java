@@ -7,7 +7,7 @@ import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.view.fragment.UsersFragment;
 import com.vpaliy.mvp.view.utils.Constant;
-import com.vpaliy.mvp.view.utils.eventBus.Action;
+import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.squareup.otto.Subscribe;
@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity{
     }
 
     @Subscribe
-    public void catchAction(@NonNull Action<String> action) {
+    public void catchAction(@NonNull ExternalAction<String> action) {
         switch (action.getActionCode()) {
             case Constant.SWAP_TO_BOOKS:
             case Constant.SWAP_TO_USERS:

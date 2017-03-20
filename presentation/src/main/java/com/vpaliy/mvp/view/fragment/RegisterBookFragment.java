@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
 import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.RegisterBookContract;
 import com.vpaliy.mvp.view.adapter.RegisterBookAdapter;
+import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
 import com.vpaliy.mvp.view.view.LockableSlider;
 
 import javax.inject.Inject;
@@ -35,6 +38,9 @@ public class RegisterBookFragment extends Fragment
     @BindView(R.id.indicator)
     protected CircleIndicator indicator;
 
+    @Inject
+    private Bus eventBus;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +49,9 @@ public class RegisterBookFragment extends Fragment
 
     private void initializeInjection() {
         DaggerFragmentComponent.builder()
-            .applicationComponent(App.app().provideAppComponent())
-            .presenterModule(new PresenterModule())
-            .build().inject(this);
+                .applicationComponent(App.app().provideAppComponent())
+                .presenterModule(new PresenterModule())
+                .build().inject(this);
     }
 
     @Nullable
@@ -67,12 +73,29 @@ public class RegisterBookFragment extends Fragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventBus.unregister(this);
+    }
+
+    @Override
     public void showInputError(@NonNull String message) {
 
     }
 
     @Override
     public void proceed() {
+        slider.next();
+    }
+
+    @Subscribe
+    public void onUserInput(@NonNull InternalAction<Void> action) {
 
     }
 

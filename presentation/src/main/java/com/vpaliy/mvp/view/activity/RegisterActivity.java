@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 
+import com.squareup.otto.Subscribe;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.view.fragment.RegisterBookFragment;
 import com.vpaliy.mvp.view.fragment.RegisterUserFragment;
 import com.vpaliy.mvp.view.utils.Constant;
+import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -53,6 +55,11 @@ public class RegisterActivity extends BaseActivity {
     void initializeInjector() {
         App.app().provideAppComponent()
             .inject(this);
+    }
+
+    @Subscribe
+    public void catchAction(ExternalAction<Void> action) {
+
     }
 
     @Override
