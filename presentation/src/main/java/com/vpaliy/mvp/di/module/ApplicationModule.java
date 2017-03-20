@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.squareup.otto.Bus;
+import com.vpaliy.mvp.navigator.Navigator;
 
 import javax.inject.Singleton;
 import dagger.Module;
@@ -28,6 +29,12 @@ public class ApplicationModule {
     @Provides
     Bus provideEventBus() {
         return new Bus();
+    }
+
+    @Singleton
+    @Provides
+    Navigator provideNavigator() {
+        return new Navigator();
     }
 
 }

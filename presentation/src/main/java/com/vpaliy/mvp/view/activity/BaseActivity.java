@@ -1,6 +1,7 @@
 package com.vpaliy.mvp.view.activity;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.squareup.otto.Bus;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 public abstract class BaseActivity extends AppCompatActivity{
 
+    @Inject
     protected Navigator navigator;
 
     @Inject
@@ -23,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     abstract void unregister();
 
     /**
-     * Inject dependencies
+     * Inject the dependencies
      */
     abstract void initializeInjector();
 
@@ -35,12 +37,14 @@ public abstract class BaseActivity extends AppCompatActivity{
 
 
     @Override
+    @CallSuper
     protected void onStart() {
         super.onStart();
         register();
     }
 
     @Override
+    @CallSuper
     protected void onStop() {
         super.onStop();
         unregister();

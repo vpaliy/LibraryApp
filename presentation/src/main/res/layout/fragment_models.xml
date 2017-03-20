@@ -1,0 +1,36 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/actionBar"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.design.widget.AppBarLayout>
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/recycleView"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+   </android.support.v7.widget.RecyclerView>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/actionButton"
+        android:layout_margin="25dp"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</android.support.design.widget.CoordinatorLayout>

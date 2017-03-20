@@ -92,6 +92,11 @@ public class BookListPresenter implements Presenter {
         view.showLoadingError();
     }
 
+    @Override
+    public void addBook() {
+        view.addBookAction();
+    }
+
     public void deleteBook(@NonNull BookModel bookModel) {
         deleteUseCase.execute(bookModel);
     }

@@ -35,7 +35,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
         @Override
         public void onClick(View v) {
-            Action<UserModel> action=new Action<>(data.get(getAdapterPosition()));
+           // Action<UserModel> action=new Action<>(data.get(getAdapterPosition()));
 
         }
 

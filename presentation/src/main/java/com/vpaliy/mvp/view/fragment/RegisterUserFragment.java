@@ -12,6 +12,7 @@ import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
 import com.vpaliy.mvp.di.module.PresenterModule;
+import com.vpaliy.mvp.mvp.contract.BookDetailsContract;
 import com.vpaliy.mvp.mvp.contract.RegisterUserContract;
 import com.vpaliy.mvp.view.adapter.RegisterUserAdapter;
 import com.vpaliy.mvp.view.view.LockableSlider;
@@ -19,6 +20,7 @@ import com.vpaliy.mvp.view.view.LockableSlider;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.internal.operators.BufferUntilSubscriber;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterUserContract.Presenter;
 
@@ -49,14 +51,16 @@ public class RegisterUserFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         presenter.onAttachView(this);
-        return inflater.inflate(R.layout.fragment_register,container,false);
+        View view=inflater.inflate(R.layout.fragment_register,container,false);
+        ButterKnife.bind(this,view);
+        slider=ButterKnife.findById(view,R.id.slider);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(view!=null) {
-            ButterKnife.bind(this,view);
             adapter=new RegisterUserAdapter(getFragmentManager());
             slider.setAdapter(adapter);
         }

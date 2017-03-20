@@ -1,17 +1,16 @@
 package com.vpaliy.mvp.view.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import com.squareup.otto.Subscribe;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
-import com.vpaliy.mvp.view.fragment.BooksFragment;
 import com.vpaliy.mvp.view.fragment.UsersFragment;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.Action;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import com.squareup.otto.Subscribe;
 
 public class MainActivity extends BaseActivity{
 
@@ -44,29 +43,26 @@ public class MainActivity extends BaseActivity{
     }
 
     @Subscribe
-    public void swap(@NonNull Action<String> action) {
-        FragmentManager manager=getSupportFragmentManager();
-        Fragment requestedFragment=manager.findFragmentByTag(action.getData());
-        if(requestedFragment!=null) {
-            manager.beginTransaction()
-                    .replace(R.id.fragment, requestedFragment, action.getData())
-                    .commit();
-        }else {
-            switch (action.getData()) {
-                case Constant.BOOKS_FRAGMENT:
-                    requestedFragment=new BooksFragment();
-                    manager.beginTransaction()
-                        .replace(R.id.fragment,requestedFragment,action.getData())
-                        .commit();
-                    break;
-                case Constant.USERS_FRAGMENT:
-                    requestedFragment=new UsersFragment();
-                    manager.beginTransaction()
-                            .replace(R.id.fragment,requestedFragment,action.getData())
-                            .commit();
-                    break;
-            }
+    public void catchAction(@NonNull Action<String> action) {
+        switch (action.getActionCode()) {
+            case Constant.SWAP_TO_BOOKS:
+            case Constant.SWAP_TO_USERS:
+                swapAction(action.getActionCode());
+                break;
+            case Constant.ADD_BOOK:
+            case Constant.ADD_USER:
+                addAction(action.getActionCode());
+                break;
+
         }
+    }
+
+    private void swapAction(int code) {
+
+    }
+
+    private void addAction(int code) {
+        navigator.navigateToRegistration(this,code);
     }
 
     @Override

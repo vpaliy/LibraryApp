@@ -11,6 +11,7 @@ import com.vpaliy.domain.repository.IRepository;
 import com.vpaliy.mvp.di.module.ApplicationModule;
 import com.vpaliy.mvp.di.module.DataModule;
 import com.vpaliy.mvp.di.module.RepositoryModule;
+import com.vpaliy.mvp.navigator.Navigator;
 import com.vpaliy.mvp.view.activity.BaseActivity;
 
 import javax.inject.Singleton;
@@ -28,6 +29,7 @@ public interface ApplicationComponent {
     void inject(BaseActivity activity);
     Context context();
     Bus eventBus();
+    Navigator navigator();
     SchedulerProvider scheduler();
     IRepository<UserModel> userRepository();
     IRepository<BookModel> bookRepository();

@@ -80,6 +80,11 @@ public class UserListPresenter implements Presenter {
                         ()->view.setLoadingIndicator(false)));
     }
 
+    @Override
+    public void addUser() {
+        view.addUserAction();
+    }
+
     private void processData(@NonNull List<UserModel> userList) {
         view.showUserList(userList);
     }

@@ -4,9 +4,11 @@ package com.vpaliy.mvp.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +20,15 @@ import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
 import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.UserListContract;
 import com.vpaliy.mvp.view.adapter.UserAdapter;
+import com.vpaliy.mvp.view.utils.Constant;
+import com.vpaliy.mvp.view.utils.eventBus.Action;
+
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 import static com.vpaliy.mvp.mvp.contract.UserListContract.Presenter;
@@ -36,7 +43,12 @@ public class UsersFragment extends Fragment
     protected Bus eventBus;
 
     @BindView(R.id.recycleView)
-    private RecyclerView userList;
+    protected RecyclerView userList;
+
+    @BindView(R.id.actionButton)
+    protected FloatingActionButton actionButton;
+
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,14 +72,12 @@ public class UsersFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         presenter.onAttachView(this);
-        return inflater.inflate(R.layout.fragment_users,container,false);
-    }
-
-    @Override
-    public void onViewCreated(View root, @Nullable Bundle savedInstanceState) {
-        if(root!=null) {
-            ButterKnife.bind(this,root);
-        }
+        View root=inflater.inflate(R.layout.fragment_models,container,false);
+        unbinder=ButterKnife.bind(this,root);
+        ButterKnife.setDebug(true);
+        actionButton=ButterKnife.findById(root,R.id.actionButton);
+        actionButton.setOnClickListener(this::addClick);
+        return root;
     }
 
     private void initializeInjector() {
@@ -114,7 +124,23 @@ public class UsersFragment extends Fragment
     }
 
     @Override
-    public void switchToBooks() {
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
 
+    @Override
+    public void switchToBooks() {
+        eventBus.post(new Action<Void>(Constant.SWAP_TO_BOOKS));
+    }
+
+    @OnClick(R.id.actionButton)
+    public void addClick(View view) {
+        presenter.addUser();
+    }
+
+    @Override
+    public void addUserAction() {
+        eventBus.post(new Action<Void>(Constant.ADD_USER));
     }
 }

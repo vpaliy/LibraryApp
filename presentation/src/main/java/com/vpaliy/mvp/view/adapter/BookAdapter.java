@@ -33,7 +33,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>{
 
         @Override
         public void onClick(View v) {
-            Action<BookModel> action=new Action<>(data.get(getAdapterPosition()));
+            //Action<BookModel> action=new Action<>(data.get(getAdapterPosition()));
 
         }
 
