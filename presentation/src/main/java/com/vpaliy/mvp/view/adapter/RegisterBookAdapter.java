@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.vpaliy.mvp.view.fragment.RegisterFragment;
 import com.vpaliy.mvp.view.wrapper.InputWrapper;
 
+import static com.vpaliy.mvp.mvp.contract.RegisterBookContract.*;
 
 public class RegisterBookAdapter extends FragmentPagerAdapter {
 
@@ -26,37 +27,37 @@ public class RegisterBookAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case AUTHOR: {
-                InputWrapper wrapper = new InputWrapper("Author");
+                InputWrapper wrapper = new InputWrapper("Author",AUTHOR);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);
             }
             case TITLE: {
-                InputWrapper wrapper = new InputWrapper("Title");
+                InputWrapper wrapper = new InputWrapper("Title",TITLE);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);
             }
             case RESTRICTION: {
-                InputWrapper wrapper=new InputWrapper("Age restriction");
+                InputWrapper wrapper=new InputWrapper("Age restriction",AGE_RESTRICTION);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);
             }
             case GENRE: {
-                InputWrapper wrapper=new InputWrapper("Genre");
+                InputWrapper wrapper=new InputWrapper("Genre",GENRE);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);
             }
             case NUMBER_OF_PAGES: {
-                InputWrapper wrapper=new InputWrapper("Number of pages");
+                InputWrapper wrapper=new InputWrapper("Number of pages",NUMBER_OF_PAGES);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);
             }
             case DESCRIPTION: {
-                InputWrapper wrapper=new InputWrapper("Description");
+                InputWrapper wrapper=new InputWrapper("Description",DESCRIPTION);
                 wrapper.setTextColor(Color.BLUE);
                 wrapper.setTextColor(Color.BLACK);
                 return RegisterFragment.newInstance(wrapper);

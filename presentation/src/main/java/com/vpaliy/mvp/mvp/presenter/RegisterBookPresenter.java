@@ -37,7 +37,7 @@ public class RegisterBookPresenter implements Presenter{
 
 
     private void validateAuthor(String author) {
-        if(author==null||!author.isEmpty()) {
+        if(author==null||author.isEmpty()) {
             view.showInputError("Empty field");
         }else {
             view.proceed();

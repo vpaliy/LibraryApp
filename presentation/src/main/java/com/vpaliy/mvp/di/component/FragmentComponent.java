@@ -17,6 +17,6 @@ public interface FragmentComponent {
     void inject(UsersFragment fragment);
     void inject(BookDetailsFragment fragment);
     void inject(UserDetailsFragment fragment);
-    void inject(RegisterBookFragment fragment);
+   // void inject(RegisterBookFragment fragment);
     void inject(RegisterUserFragment fragment);
 }

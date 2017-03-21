@@ -13,12 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.squareup.otto.Bus;
+import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.view.utils.Constant;
+import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
 import com.vpaliy.mvp.view.wrapper.InputWrapper;
 
 import javax.inject.Inject;
-
 import static butterknife.ButterKnife.findById;
 
 public class RegisterFragment extends Fragment {
@@ -43,6 +44,11 @@ public class RegisterFragment extends Fragment {
             savedInstanceState=getArguments();
         }
         inputWrapper=savedInstanceState.getParcelable(Constant.INPUT_WRAPPER);
+        initializeInjection();
+    }
+
+    private void initializeInjection() {
+        App.app().provideAppComponent().inject(this);
     }
 
     @Nullable
@@ -59,12 +65,13 @@ public class RegisterFragment extends Fragment {
             EditText input=findById(view,R.id.dataInput);
             TextView property=findById(view,R.id.property);
             property.setText(inputWrapper.getProperty());
-            input.setText(inputWrapper.getProperty());
-            submitButton.setBackgroundColor(inputWrapper.getColor());
-            submitButton.setTextColor(inputWrapper.getColor());
-            input.setInputType(inputWrapper.getInputType());
+          //  input.setText(inputWrapper.getProperty());
+            //input.setInputType(inputWrapper.getInputType());
+
             //notify the presenter
-            submitButton.setOnClickListener(v->{});
+            submitButton.setOnClickListener(v->bus
+                .post(new InternalAction<>(input.getText().toString(),
+                    inputWrapper.getPropertyCode())));
 
         }
     }

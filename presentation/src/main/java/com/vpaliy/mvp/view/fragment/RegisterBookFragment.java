@@ -1,5 +1,8 @@
 package com.vpaliy.mvp.view.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,7 +43,7 @@ public class RegisterBookFragment extends Fragment
     @BindView(R.id.indicator)
     protected CircleIndicator indicator;
 
-    @Inject
+   // @Inject
     private Bus eventBus;
 
 
@@ -51,16 +54,12 @@ public class RegisterBookFragment extends Fragment
     }
 
     private void initializeInjection() {
-        DaggerFragmentComponent.builder()
-                .applicationComponent(App.app().provideAppComponent())
-                .presenterModule(new PresenterModule())
-                .build().inject(this);
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        presenter.onAttachView(this);
         return inflater.inflate(R.layout.fragment_register,container,false);
     }
 
@@ -89,7 +88,23 @@ public class RegisterBookFragment extends Fragment
 
     @Override
     public void showInputError(@NonNull String message) {
-
+        View root=getView();
+        if(root!=null) {
+            ObjectAnimator shakeAnimation=ObjectAnimator.ofFloat(root,View.TRANSLATION_X,-25f,25f);
+            shakeAnimation.setDuration(100);
+            shakeAnimation.setRepeatCount(2);
+            shakeAnimation.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    root.setTranslationY(0f);
+                }
+            });
+            shakeAnimation.start();
+            SnackbarWrapper
+                    .start(root,message,2000)
+                    .show();
+        }
     }
 
     @Override
@@ -102,9 +117,10 @@ public class RegisterBookFragment extends Fragment
         presenter.validate(VerifyInput.verify(action.getActionCode(),action.getData()));
     }
 
-    @Inject
+ //   @Inject
     @Override
     public void attachPresenter(@NonNull Presenter presenter) {
         this.presenter=presenter;
+        presenter.onAttachView(this);
     }
 }

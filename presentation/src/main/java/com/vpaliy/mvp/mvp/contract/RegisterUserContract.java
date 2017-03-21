@@ -22,8 +22,8 @@ public interface RegisterUserContract {
 
     int FIRST_NAME=0;
     int LAST_NAME=1;
-    int EMAIL_ADDRESS=3;
-    int AGE=4;
+    int EMAIL_ADDRESS=2;
+    int AGE=3;
 
 
     class VerifyInput {

@@ -14,9 +14,11 @@ public class InputWrapper implements Parcelable {
     private int textColor;
     private boolean isPassword;
     private String property;
+    private int propertyCode;
 
-    public InputWrapper(@NonNull String property) {
+    public InputWrapper(@NonNull String property, int propertyCode) {
         this.property=property;
+        this.propertyCode=propertyCode;
     }
 
     public InputWrapper(Parcel parcel) {
@@ -63,6 +65,10 @@ public class InputWrapper implements Parcelable {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public int getPropertyCode() {
+        return propertyCode;
     }
 
     public void setInputType(int inputType) {

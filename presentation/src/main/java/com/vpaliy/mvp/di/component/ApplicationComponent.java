@@ -13,6 +13,7 @@ import com.vpaliy.mvp.di.module.DataModule;
 import com.vpaliy.mvp.di.module.RepositoryModule;
 import com.vpaliy.mvp.navigator.Navigator;
 import com.vpaliy.mvp.view.activity.BaseActivity;
+import com.vpaliy.mvp.view.fragment.RegisterFragment;
 
 import javax.inject.Singleton;
 import dagger.Component;
@@ -27,6 +28,7 @@ public interface ApplicationComponent {
 
     /* Downstream dependencies */
     void inject(BaseActivity activity);
+    void inject(RegisterFragment fragment);
     Context context();
     Bus eventBus();
     Navigator navigator();
