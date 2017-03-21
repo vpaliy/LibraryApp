@@ -38,4 +38,6 @@ public interface BookListContract {
         void delete(@NonNull BookModel book);
         void delete(Collection<BookModel> books);
     }
+
+
 }

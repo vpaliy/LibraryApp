@@ -17,6 +17,7 @@ import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.RegisterBookContract;
 import com.vpaliy.mvp.view.adapter.RegisterBookAdapter;
 import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
+import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
 import com.vpaliy.mvp.view.view.LockableSlider;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import butterknife.ButterKnife;
 import me.relex.circleindicator.CircleIndicator;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterBookContract.Presenter;
+import static com.vpaliy.mvp.mvp.contract.RegisterBookContract.VerifyInput;
 
 public class RegisterBookFragment extends Fragment
         implements RegisterBookContract.View{
@@ -40,6 +42,7 @@ public class RegisterBookFragment extends Fragment
 
     @Inject
     private Bus eventBus;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,8 +98,8 @@ public class RegisterBookFragment extends Fragment
     }
 
     @Subscribe
-    public void onUserInput(@NonNull InternalAction<Void> action) {
-
+    public void onUserInput(@NonNull InternalAction<String> action) {
+        presenter.validate(VerifyInput.verify(action.getActionCode(),action.getData()));
     }
 
     @Inject

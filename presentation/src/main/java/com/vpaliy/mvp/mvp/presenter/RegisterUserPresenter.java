@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.di.scope.ViewScope;
-
 import javax.inject.Inject;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterUserContract.*;
@@ -20,8 +19,8 @@ public class RegisterUserPresenter implements Presenter {
         this.addUseCase=addUseCase;
     }
 
-    @Override
-    public void validateAge(int age) {
+
+    private void validateAge(int age) {
         if(age<0) {
             view.showInputError("Error");
         }else {
@@ -29,8 +28,7 @@ public class RegisterUserPresenter implements Presenter {
         }
     }
 
-    @Override
-    public void validateEmail(String emailAddress) {
+    private void validateEmail(String emailAddress) {
         if(emailAddress==null||!emailAddress.isEmpty()) {
             view.showInputError("Empty field");
         }else if(!emailAddress.contains("@")) {
@@ -40,8 +38,7 @@ public class RegisterUserPresenter implements Presenter {
         }
     }
 
-    @Override
-    public void validateFirstName(String firstName) {
+    private void validateFirstName(String firstName) {
         if(firstName==null||!firstName.isEmpty()) {
             view.showInputError("Empty field");
         }else {
@@ -49,12 +46,32 @@ public class RegisterUserPresenter implements Presenter {
         }
     }
 
-    @Override
-    public void validateLastName(String lastName) {
+    private void validateLastName(String lastName) {
         if(lastName==null||!lastName.isEmpty()) {
             view.showInputError("Empty field");
         }else {
             view.proceed();
+        }
+    }
+
+    @Override
+    public void verify(@NonNull VerifyInput verify) {
+        switch (verify.property()) {
+            case FIRST_NAME:
+                validateFirstName(verify.input());
+                break;
+            case LAST_NAME:
+                validateLastName(verify.input());
+                break;
+            case EMAIL_ADDRESS:
+                validateEmail(verify.input());
+                break;
+            case AGE:
+                validateAge(Integer.decode(verify.input()));
+                break;
+            default:
+                //it will not happen
+                view.showInputError("Wrong!");
         }
     }
 

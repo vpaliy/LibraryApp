@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterUserContract.Presenter;
+import static com.vpaliy.mvp.mvp.contract.RegisterUserContract.VerifyInput;
 
 public class RegisterUserFragment extends Fragment
         implements RegisterUserContract.View{
@@ -88,8 +89,8 @@ public class RegisterUserFragment extends Fragment
     }
 
     @Subscribe
-    public void onUserInput(@NonNull InternalAction<Void> action) {
-
+    public void onUserInput(@NonNull InternalAction<String> action) {
+        presenter.verify(VerifyInput.verify(action.getActionCode(),action.getData()));
     }
 
     @Override

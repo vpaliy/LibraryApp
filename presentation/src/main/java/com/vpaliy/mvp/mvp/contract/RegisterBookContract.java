@@ -15,24 +15,40 @@ public interface RegisterBookContract {
 
 
     interface Presenter extends BasePresenter<View> {
-        void validateAuthor(String author);
-        void validateTitle(String title);
-        void validateAgeRestriction(int ageRestriction);
-        void validateGenre(String genre);
-        void validateNumberOfPages(int numberOfPages);
-        void validateDescription(String description);
+        void validate(@NonNull VerifyInput input);
         void onAttachView(@NonNull View view);
         void register(@NonNull BookModel model);
     }
 
-    enum Property {
-        AUTHOR,
-        TITLE,
-        AGE_RESTRICTION,
-        GENRE,
-        NUMBER_OF_PAGES,
-        DESCRIPTION
-        
+
+    int AUTHOR=0;
+    int TITLE=1;
+    int AGE_RESTRICTION=2;
+    int GENRE=3;
+    int NUMBER_OF_PAGES=4;
+    int DESCRIPTION=5;
+
+    class VerifyInput {
+
+        private int property;
+        private String input;
+
+        private VerifyInput(int property, String input) {
+            this.property=property;
+            this.input=input;
+        }
+
+        public int property() {
+            return property;
+        }
+
+        public String input() {
+            return input;
+        }
+
+        public static VerifyInput verify(int property, String input) {
+            return new VerifyInput(property,input);
+        }
     }
 
 }
