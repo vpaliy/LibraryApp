@@ -3,15 +3,12 @@ package com.vpaliy.mvp.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.vpaliy.common.scheduler.SchedulerProvider;
-import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.BookModel;
 import com.vpaliy.mvp.di.scope.ViewScope;
-
 import java.util.Collection;
 import java.util.List;
-
 import javax.inject.Inject;
 
 import rx.subscriptions.CompositeSubscription;
@@ -29,6 +26,8 @@ public class BookListPresenter implements Presenter {
     private final SchedulerProvider schedulerProvider;
     private CompositeSubscription subscriptions;
     private View view;
+
+    private boolean isRequest;
 
     @Inject
     public BookListPresenter(@NonNull GetListUseCase<BookModel> getListUseCase,
@@ -49,7 +48,7 @@ public class BookListPresenter implements Presenter {
 
     @Override
     public void delete(@NonNull BookModel book) {
-
+        deleteUseCase.execute(book);
     }
 
     @Override
@@ -67,7 +66,9 @@ public class BookListPresenter implements Presenter {
 
     @Override
     public void start() {
+        isRequest=false;
         view.setLoadingIndicator(true);
+        initialize();
     }
 
     @Override
@@ -84,13 +85,22 @@ public class BookListPresenter implements Presenter {
                            ()->view.setLoadingIndicator(false)));
     }
 
+    @Override
+    public void requestUpdate() {
+        initialize();
+    }
+
     private void processData(@NonNull List<BookModel> modelList) {
         view.showBookList(modelList);
     }
 
     private void errorHasOccurred(Throwable throwable) {
-        view.showLoadingError();
+        if(!isRequest) {
+            view.showLoadingError();
+        }
+        //otherwise retain the data
     }
+
 
     @Override
     public void addBook() {

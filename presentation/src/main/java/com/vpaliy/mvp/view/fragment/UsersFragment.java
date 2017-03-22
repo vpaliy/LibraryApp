@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +24,7 @@ import com.vpaliy.mvp.mvp.contract.UserListContract;
 import com.vpaliy.mvp.view.adapter.UserAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
-
+import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -35,6 +38,8 @@ import static com.vpaliy.mvp.mvp.contract.UserListContract.Presenter;
 public class UsersFragment extends Fragment
         implements UserListContract.View {
 
+    private static final String TAG=UsersFragment.class.getSimpleName();
+
     private Presenter presenter;
     private UserAdapter adapter;
 
@@ -46,6 +51,9 @@ public class UsersFragment extends Fragment
 
     @BindView(R.id.actionButton)
     protected FloatingActionButton actionButton;
+
+    @BindView(R.id.refresher)
+    protected SwipeRefreshLayout refresher;
 
     private Unbinder unbinder;
 
@@ -70,13 +78,18 @@ public class UsersFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        presenter.onAttachView(this);
         View root=inflater.inflate(R.layout.fragment_models,container,false);
         unbinder=ButterKnife.bind(this,root);
-        ButterKnife.setDebug(true);
-        actionButton=ButterKnife.findById(root,R.id.actionButton);
-        actionButton.setOnClickListener(this::addClick);
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View root, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(root, savedInstanceState);
+        if(root!=null) {
+            refresher.setOnRefreshListener(()->presenter.requestUpdate());
+            actionButton.setOnClickListener(this::addClick);
+        }
     }
 
     private void initializeInjector() {
@@ -90,11 +103,17 @@ public class UsersFragment extends Fragment
     @Inject
     public void attachPresenter(@NonNull Presenter presenter) {
         this.presenter=presenter;
+        this.presenter.onAttachView(this);
     }
 
     @Override
     public void showLoadingError() {
-
+        View root=getView();
+        if(root!=null) {
+            SnackbarWrapper
+            .start(root, R.string.loadingError,Snackbar.LENGTH_INDEFINITE)
+            .show();
+        }
     }
 
 
@@ -108,7 +127,7 @@ public class UsersFragment extends Fragment
         adapter=new UserAdapter(getContext(),userModelList);
         userList.setLayoutManager(new GridLayoutManager(getContext(),
                 getResources().getInteger(R.integer.spanCount),
-                GridLayoutManager.VERTICAL,false));
+                GridLayoutManager.HORIZONTAL,false));
         userList.setAdapter(adapter);
     }
 
@@ -119,7 +138,7 @@ public class UsersFragment extends Fragment
 
     @Override
     public void setLoadingIndicator(boolean isVisible) {
-
+        refresher.setRefreshing(isVisible);
     }
 
     @Override

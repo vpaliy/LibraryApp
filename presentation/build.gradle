@@ -46,7 +46,7 @@ dependencies {
     compile libs.Dagger2
     compile libs.circleIndicator
     apt libs.Dagger2Compiler
-    annotationProcessor libs.butterKnifeCompiler
+    apt libs.butterKnifeCompiler
     provided libs.javaxAnnotation
 
     testCompile testLibs.mockito

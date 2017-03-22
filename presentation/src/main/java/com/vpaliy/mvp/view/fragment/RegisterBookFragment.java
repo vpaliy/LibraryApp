@@ -26,6 +26,7 @@ import com.vpaliy.mvp.view.view.LockableSlider;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.relex.circleindicator.CircleIndicator;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterBookContract.Presenter;
@@ -46,6 +47,8 @@ public class RegisterBookFragment extends Fragment
    // @Inject
     private Bus eventBus;
 
+    private Unbinder unbinder;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,14 +63,15 @@ public class RegisterBookFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_register,container,false);
+        View view=inflater.inflate(R.layout.fragment_register,container,false);
+        unbinder=ButterKnife.bind(this,view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(view!=null) {
-            ButterKnife.bind(this,view);
             adapter=new RegisterBookAdapter(getFragmentManager());
             slider.setAdapter(adapter);
             indicator.setViewPager(slider);

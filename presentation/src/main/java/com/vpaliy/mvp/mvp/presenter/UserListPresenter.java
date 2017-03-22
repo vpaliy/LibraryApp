@@ -1,8 +1,9 @@
 package com.vpaliy.mvp.mvp.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.vpaliy.common.scheduler.SchedulerProvider;
-import com.vpaliy.domain.interactor.AddUseCase;
 import com.vpaliy.domain.interactor.DeleteUseCase;
 import com.vpaliy.domain.interactor.GetListUseCase;
 import com.vpaliy.domain.model.UserModel;
@@ -25,6 +26,7 @@ public class UserListPresenter implements Presenter {
     private final SchedulerProvider schedulerProvider;
     private CompositeSubscription subscriptions;
     private View view;
+    private boolean isRequested;
 
     @Inject
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
@@ -56,7 +58,8 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void start() {
-        view.setLoadingIndicator(true);
+        view.setLoadingIndicator(false);
+        initialize();
     }
 
     @Override
@@ -85,12 +88,21 @@ public class UserListPresenter implements Presenter {
         view.addUserAction();
     }
 
+    @Override
+    public void requestUpdate() {
+        isRequested=true;
+        initialize();
+    }
+
     private void processData(@NonNull List<UserModel> userList) {
         view.showUserList(userList);
+        view.setLoadingIndicator(false);
     }
 
     private void errorHasOccurred(Throwable throwable) {
         view.showLoadingError();
+        view.setLoadingIndicator(false);
+        Log.e(UserListPresenter.class.getSimpleName(),throwable.toString());
     }
 
 

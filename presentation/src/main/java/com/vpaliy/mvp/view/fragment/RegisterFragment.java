@@ -40,6 +40,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if(savedInstanceState==null) {
             savedInstanceState=getArguments();
         }
@@ -74,5 +75,11 @@ public class RegisterFragment extends Fragment {
                     inputWrapper.getPropertyCode())));
 
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(Constant.INPUT_WRAPPER,inputWrapper);
+        super.onSaveInstanceState(outState);
     }
 }

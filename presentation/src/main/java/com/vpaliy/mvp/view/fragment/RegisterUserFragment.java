@@ -24,6 +24,7 @@ import com.vpaliy.mvp.view.view.LockableSlider;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.relex.circleindicator.CircleIndicator;
 
 import static com.vpaliy.mvp.mvp.contract.RegisterUserContract.Presenter;
@@ -44,6 +45,8 @@ public class RegisterUserFragment extends Fragment
     @Inject
     protected Bus eventBus;
 
+    private Unbinder unbinder;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,9 +66,7 @@ public class RegisterUserFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         presenter.onAttachView(this);
         View view=inflater.inflate(R.layout.fragment_register,container,false);
-        ButterKnife.bind(this,view);
-        slider=ButterKnife.findById(view,R.id.slider);
-        indicator=ButterKnife.findById(view,R.id.indicator);
+        unbinder=ButterKnife.bind(this,view);
         return view;
     }
 
@@ -116,6 +117,12 @@ public class RegisterUserFragment extends Fragment
     @Subscribe
     public void onUserInput(@NonNull InternalAction<String> action) {
         presenter.verify(VerifyInput.verify(action.getActionCode(),action.getData()));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @Override

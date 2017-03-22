@@ -55,9 +55,9 @@ public class Repository<Fake,Real> implements IRepository<Real> {
 
     @Override
     public Observable<List<Real>> getList() {
-        return Observable.concat(
-                localSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()),
-                remoteSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()));
+        return //Observable.concat(
+                localSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList());//l,
+                //remoteSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()));
     }
 
     @Override

@@ -11,7 +11,7 @@ public final class PersistenceContract {
 
     public static class UserEntry implements BaseColumns {
         public  static final String TABLE_NAME = "users";
-        public  static final String COLUMN_NAME_ENTRY_ID = _ID;
+        public  static final String COLUMN_NAME_ENTRY_ID ="userId";
         public static final String COLUMN_FIRST_NAME = "firstName";
         public static final String COLUMN_LAST_NAME="lastName";
         public static final String COLUMN_EMAIL_ADDRESS="emailAddress";
@@ -20,7 +20,7 @@ public final class PersistenceContract {
 
     public static class BookEntry implements BaseColumns {
          public static final String TABLE_NAME = "books";
-         public static final String COLUMN_NAME_ENTRY_ID =_ID;
+         public static final String COLUMN_NAME_ENTRY_ID ="bookId";
          public static final String COLUMN_NAME_TITLE = "title";
          public static final String COLUMN_NAME_AUTHOR="author";
          public static final String COLUMN_NAME_DESCRIPTION = "description";

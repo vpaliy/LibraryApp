@@ -35,6 +35,7 @@ public interface BookListContract {
         /* UI events */
         void addBook();
         void switchToUsers();
+        void requestUpdate();
         void delete(@NonNull BookModel book);
         void delete(Collection<BookModel> books);
     }

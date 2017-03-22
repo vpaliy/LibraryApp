@@ -35,6 +35,7 @@ public interface  UserListContract {
         /* UI events */
         void addUser();
         void switchToBooks();
+        void requestUpdate();
         void delete(@NonNull UserModel user);
         void delete(Collection<UserModel> users);
     }

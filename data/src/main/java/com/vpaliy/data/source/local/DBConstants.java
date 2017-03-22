@@ -14,7 +14,7 @@ final class DBConstants {
 
     static final String CREATE="CREATE TABLE ";
 
-    static final String COMMA_SEP = ",";
+    static final String COMMA_SEP = ", ";
 
     static final String PRIMARY_KEY="PRIMARY KEY";
 }
