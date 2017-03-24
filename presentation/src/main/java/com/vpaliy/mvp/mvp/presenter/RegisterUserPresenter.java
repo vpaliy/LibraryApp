@@ -23,42 +23,51 @@ public class RegisterUserPresenter implements Presenter {
     }
 
 
-    private void validateAge(int age) {
+    private boolean validateAge(int age) {
         if(age<0) {
             view.showInputError("Error");
+            return false;
         }else {
             user.setAge(age);
             view.proceed();
         }
+        return true;
     }
 
-    private void validateEmail(String emailAddress) {
+    private boolean validateEmail(String emailAddress) {
         if(emailAddress==null||emailAddress.isEmpty()) {
             view.showInputError("Empty field");
+            return false;
         }else if(!emailAddress.contains("@")) {
             view.showInputError("This is not an email address");
+            return false;
         }else {
             user.setEmailAddress(emailAddress);
             view.proceed();
         }
+        return true;
     }
 
-    private void validateFirstName(String firstName) {
+    private boolean validateFirstName(String firstName) {
         if(firstName==null||firstName.isEmpty()) {
             view.showInputError("Empty field");
+            return false;
         }else {
             user.setFirstName(firstName);
             view.proceed();
         }
+        return true;
     }
 
-    private void validateLastName(String lastName) {
+    private boolean validateLastName(String lastName) {
         if(lastName==null||lastName.isEmpty()) {
             view.showInputError("Empty field");
+            return false;
         }else {
             user.setLastName(lastName);
             view.proceed();
         }
+        return true;
     }
 
     @Override
@@ -90,6 +99,12 @@ public class RegisterUserPresenter implements Presenter {
 
     @Override
     public void register(@NonNull UserModel model) {
-        addUseCase.execute(model);
+        boolean isValid=validateAge(model.getAge());
+        isValid&=validateEmail(model.getEmailAddress());
+        isValid&=validateFirstName(model.getFirstName());
+        isValid&=validateLastName(model.getLastName());
+        if(isValid) {
+            addUseCase.execute(model);
+        }
     }
 }

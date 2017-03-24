@@ -22,6 +22,7 @@ public interface  UserListContract {
         void switchToBooks();
         void addUserAction();
         void showDeleteUser();
+        void showEmptyMessage();
         void appendUserList(@NonNull List<UserModel> userModelList);
 
     }

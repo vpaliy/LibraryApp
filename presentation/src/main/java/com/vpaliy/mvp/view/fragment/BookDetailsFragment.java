@@ -9,6 +9,8 @@ import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
 import com.vpaliy.mvp.di.module.PresenterModule;
 import com.vpaliy.mvp.mvp.contract.BookDetailsContract;
+import com.vpaliy.mvp.view.utils.Constant;
+
 import javax.inject.Inject;
 
 import static com.vpaliy.mvp.mvp.contract.BookDetailsContract.Presenter;
@@ -17,10 +19,23 @@ public class BookDetailsFragment extends Fragment
     implements BookDetailsContract.View{
 
     private Presenter presenter;
+    private String ID;
+
+    public static BookDetailsFragment newInstance(@NonNull String ID) {
+        Bundle args=new Bundle();
+        args.putString(Constant.ID,ID);
+        BookDetailsFragment fragment=new BookDetailsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState==null) {
+            savedInstanceState=getArguments();
+        }
+        this.ID=savedInstanceState.getString(Constant.ID);
         initializeInjector();
     }
 
@@ -34,8 +49,10 @@ public class BookDetailsFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        presenter.start(ID);
     }
+
+
 
     @Override
     public void onPause() {
@@ -50,7 +67,13 @@ public class BookDetailsFragment extends Fragment
     }
 
     @Override
-    public void showBookDetails(@NonNull BookModel book) {
+    public void showBook(@NonNull BookModel book) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(Constant.ID,ID);
+        super.onSaveInstanceState(outState);
     }
 }

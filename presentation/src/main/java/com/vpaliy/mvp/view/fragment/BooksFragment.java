@@ -17,7 +17,6 @@ import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
 import com.vpaliy.mvp.di.module.PresenterModule;
-import com.vpaliy.mvp.mvp.contract.BookDetailsContract;
 import com.vpaliy.mvp.mvp.contract.BookListContract;
 import com.vpaliy.mvp.view.adapter.BookAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
@@ -107,6 +106,11 @@ public class BooksFragment extends Fragment
             getResources().getInteger(R.integer.spanCount),
             GridLayoutManager.VERTICAL,false));
         bookList.setAdapter(adapter);
+    }
+
+    @Override
+    public void showEmptyMessage() {
+
     }
 
     @Override

@@ -10,10 +10,14 @@ import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
 import com.squareup.otto.Subscribe;
+import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 
 public class MainActivity extends BaseActivity{
 
+    private static final String TAG=MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class MainActivity extends BaseActivity{
     }
 
     @Subscribe
-    public void catchAction(@NonNull ExternalAction<String> action) {
+    public void catchAction(@NonNull ExternalAction<?> action) {
         switch (action.getActionCode()) {
             case Constant.SWAP_TO_BOOKS:
             case Constant.SWAP_TO_USERS:
@@ -52,6 +56,10 @@ public class MainActivity extends BaseActivity{
             case Constant.ADD_BOOK:
             case Constant.ADD_USER:
                 addAction(action.getActionCode());
+                break;
+            case Constant.BOOK_DETAILS:
+            case Constant.USER_DETAILS:
+                viewDetails(action);
                 break;
 
         }
@@ -63,6 +71,11 @@ public class MainActivity extends BaseActivity{
 
     private void addAction(int code) {
         navigator.navigateToRegistration(this,code);
+    }
+
+    private void viewDetails(@NonNull ExternalAction<?> action) {
+        TransitionWrapper wrapper=TransitionWrapper.class.cast(action.getData());
+        navigator.navigateToDetails(this,wrapper,action.getActionCode());
     }
 
     @Override

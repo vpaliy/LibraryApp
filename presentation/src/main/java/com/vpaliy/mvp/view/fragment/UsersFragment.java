@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 import com.vpaliy.domain.model.UserModel;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
@@ -24,7 +25,10 @@ import com.vpaliy.mvp.mvp.contract.UserListContract;
 import com.vpaliy.mvp.view.adapter.UserAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
+import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
 import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
+import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
+
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -75,6 +79,18 @@ public class UsersFragment extends Fragment
         presenter.start();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        eventBus.unregister(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -111,7 +127,7 @@ public class UsersFragment extends Fragment
         View root=getView();
         if(root!=null) {
             SnackbarWrapper
-            .start(root, R.string.loadingError,Snackbar.LENGTH_INDEFINITE)
+            .start(root, R.string.loadingError, Snackbar.LENGTH_INDEFINITE)
             .show();
         }
     }
@@ -124,7 +140,7 @@ public class UsersFragment extends Fragment
 
     @Override
     public void showUserList(@NonNull List<UserModel> userModelList) {
-        adapter=new UserAdapter(getContext(),userModelList);
+        adapter=new UserAdapter(getContext(),userModelList,eventBus);
         userList.setLayoutManager(new GridLayoutManager(getContext(),
                 getResources().getInteger(R.integer.spanCount),
                 GridLayoutManager.HORIZONTAL,false));
@@ -148,6 +164,11 @@ public class UsersFragment extends Fragment
     }
 
     @Override
+    public void showEmptyMessage() {
+
+    }
+
+    @Override
     public void switchToBooks() {
         eventBus.post(new ExternalAction<Void>(Constant.SWAP_TO_BOOKS));
     }
@@ -161,4 +182,11 @@ public class UsersFragment extends Fragment
     public void addUserAction() {
         eventBus.post(new ExternalAction<Void>(Constant.ADD_USER));
     }
+
+    @Subscribe
+    public void onUserClicked(@NonNull InternalAction<TransitionWrapper> action) {
+        Log.d(TAG,"onUserClicked");
+        eventBus.post(new ExternalAction<>(action.getData(),Constant.USER_DETAILS));
+    }
+
 }

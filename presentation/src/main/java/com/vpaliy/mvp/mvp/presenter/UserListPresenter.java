@@ -58,7 +58,7 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void start() {
-        view.setLoadingIndicator(false);
+        view.setLoadingIndicator(true);
         initialize();
     }
 
