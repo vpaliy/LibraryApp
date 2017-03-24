@@ -4,8 +4,6 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.vpaliy.mvp.view.activity.BaseActivity;
 import com.vpaliy.mvp.view.activity.DetailsActivity;
 import com.vpaliy.mvp.view.activity.RegisterActivity;

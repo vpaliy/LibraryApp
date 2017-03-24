@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 import com.vpaliy.domain.model.BookModel;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
@@ -21,7 +22,9 @@ import com.vpaliy.mvp.mvp.contract.BookListContract;
 import com.vpaliy.mvp.view.adapter.BookAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
+import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
 import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
+import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 
 import java.util.List;
 import android.support.annotation.NonNull;
@@ -101,10 +104,10 @@ public class BooksFragment extends Fragment
 
     @Override
     public void showBookList(@NonNull List<BookModel> userModelList) {
-        adapter=new BookAdapter(getContext(),userModelList);
+        adapter=new BookAdapter(getContext(),userModelList,eventBus);
         bookList.setLayoutManager(new GridLayoutManager(getContext(),
-            getResources().getInteger(R.integer.spanCount),
-            GridLayoutManager.VERTICAL,false));
+                getResources().getInteger(R.integer.spanCount),
+                GridLayoutManager.VERTICAL,false));
         bookList.setAdapter(adapter);
     }
 
@@ -129,9 +132,14 @@ public class BooksFragment extends Fragment
         View root=getView();
         if(root!=null) {
             SnackbarWrapper
-                .start(root,R.string.loadingError, Snackbar.LENGTH_INDEFINITE)
-                .show();
+                    .start(root,R.string.loadingError, Snackbar.LENGTH_INDEFINITE)
+                    .show();
         }
+    }
+
+    @Subscribe
+    public void onBookClicked(@NonNull InternalAction<TransitionWrapper> action) {
+        eventBus.post(new ExternalAction<>(action.getData(),Constant.BOOK_DETAILS));
     }
 
     @Override
