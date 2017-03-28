@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 def config = rootProject.ext.configuration
@@ -45,8 +44,8 @@ dependencies {
     compile libs.supportAppCompat
     compile libs.Dagger2
     compile libs.circleIndicator
-    apt libs.Dagger2Compiler
-    apt libs.butterKnifeCompiler
+    annotationProcessor libs.Dagger2Compiler
+    annotationProcessor libs.butterKnifeCompiler
     provided libs.javaxAnnotation
 
     testCompile testLibs.mockito

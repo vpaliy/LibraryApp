@@ -28,7 +28,6 @@ import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
 import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
 import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
-
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -165,7 +164,12 @@ public class UsersFragment extends Fragment
 
     @Override
     public void showEmptyMessage() {
-
+        View root=getView();
+        if(root!=null) {
+            SnackbarWrapper
+                    .start(root, R.string.emptyData, Snackbar.LENGTH_INDEFINITE)
+                    .show();
+        }
     }
 
     @Override
@@ -185,7 +189,6 @@ public class UsersFragment extends Fragment
 
     @Subscribe
     public void onUserClicked(@NonNull InternalAction<TransitionWrapper> action) {
-        Log.d(TAG,"onUserClicked");
         eventBus.post(new ExternalAction<>(action.getData(),Constant.USER_DETAILS));
     }
 

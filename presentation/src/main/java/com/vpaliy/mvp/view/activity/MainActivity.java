@@ -10,14 +10,13 @@ import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
-
 import com.squareup.otto.Subscribe;
 import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 
 public class MainActivity extends BaseActivity{
 
     private static final String TAG=MainActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,12 +79,12 @@ public class MainActivity extends BaseActivity{
 
     @Override
     void register() {
-        eventBus.register(this);
+      //  eventBus.register(this);
     }
 
     @Override
     void unregister() {
-        eventBus.unregister(this);
+      ///  eventBus.unregister(this);
     }
 
     @Override
@@ -93,14 +92,4 @@ public class MainActivity extends BaseActivity{
         App.app().provideAppComponent().inject(this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 }

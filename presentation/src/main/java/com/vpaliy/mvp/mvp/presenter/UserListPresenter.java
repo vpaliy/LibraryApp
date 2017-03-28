@@ -95,8 +95,12 @@ public class UserListPresenter implements Presenter {
     }
 
     private void processData(@NonNull List<UserModel> userList) {
-        view.showUserList(userList);
         view.setLoadingIndicator(false);
+        if(!userList.isEmpty()) {
+            view.showUserList(userList);
+        }else{
+            view.showEmptyMessage();
+        }
     }
 
     private void errorHasOccurred(Throwable throwable) {

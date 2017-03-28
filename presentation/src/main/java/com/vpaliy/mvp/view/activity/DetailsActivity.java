@@ -4,8 +4,8 @@ package com.vpaliy.mvp.view.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 
+import android.support.v4.app.FragmentManager;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.view.fragment.BookDetailsFragment;

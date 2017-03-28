@@ -2,5 +2,6 @@
     <string name="app_name">"Library App "</string>
     <string name="submit">Submit</string>
     <string name="loadingError">Loading error has occurred</string>
+    <string name="emptyData">No data available</string>
 
 </resources>
