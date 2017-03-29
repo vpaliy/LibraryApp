@@ -5,15 +5,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.vpaliy.domain.model.BookModel;
+import com.vpaliy.multiplechoice.BaseAdapter;
+import com.vpaliy.multiplechoice.MultiMode;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
@@ -54,6 +60,20 @@ public class BooksFragment extends Fragment
 
     @BindView(R.id.refresher)
     protected SwipeRefreshLayout refresher;
+
+    @BindView(R.id.actionBar)
+    protected Toolbar actionBar;
+
+    private MultiMode.Callback callback=new MultiMode.Callback() {
+        @Override
+        public boolean onMenuItemClick(BaseAdapter adapter, MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.delete:
+                    return true;
+            }
+            return false;
+        }
+    };
 
     private Unbinder unbinder;
 
@@ -104,11 +124,19 @@ public class BooksFragment extends Fragment
 
     @Override
     public void showBookList(@NonNull List<BookModel> userModelList) {
-        adapter=new BookAdapter(getContext(),userModelList,eventBus);
-        bookList.setLayoutManager(new GridLayoutManager(getContext(),
-                getResources().getInteger(R.integer.spanCount),
-                GridLayoutManager.VERTICAL,false));
+        adapter=new BookAdapter(getContext(),userModelList,eventBus,buildMultiMode());
+        bookList.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL,false));
+        bookList.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
         bookList.setAdapter(adapter);
+    }
+
+    private MultiMode buildMultiMode(){
+        return new MultiMode.Builder(actionBar,getActivity())
+                .setBackgroundColor(R.color.colorChoiceMode)
+                .setNavigationIcon(getResources().getDrawable(R.drawable.ic_clear_black_24dp))
+                .setMenu(R.menu.menu_list,callback)
+                .build();
     }
 
     @Override

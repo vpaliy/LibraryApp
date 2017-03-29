@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/multiplechoice" />
             <option value="$PROJECT_DIR$/presentation" />
           </set>
         </option>

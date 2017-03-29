@@ -26,7 +26,6 @@ public class UserListPresenter implements Presenter {
     private final SchedulerProvider schedulerProvider;
     private CompositeSubscription subscriptions;
     private View view;
-    private boolean isRequested;
 
     @Inject
     public UserListPresenter(@NonNull GetListUseCase<UserModel> getListUseCase,
@@ -79,8 +78,8 @@ public class UserListPresenter implements Presenter {
         subscriptions.add(getListUseCase.execute()
                 .observeOn(schedulerProvider.ui())
                 .subscribe(this::processData,
-                        this::errorHasOccurred,
-                        ()->view.setLoadingIndicator(false)));
+                           this::errorHasOccurred,
+                           ()->view.setLoadingIndicator(false)));
     }
 
     @Override
@@ -90,7 +89,6 @@ public class UserListPresenter implements Presenter {
 
     @Override
     public void requestUpdate() {
-        isRequested=true;
         initialize();
     }
 
@@ -106,6 +104,7 @@ public class UserListPresenter implements Presenter {
     private void errorHasOccurred(Throwable throwable) {
         view.showLoadingError();
         view.setLoadingIndicator(false);
+        //show the error
         Log.e(UserListPresenter.class.getSimpleName(),throwable.toString());
     }
 

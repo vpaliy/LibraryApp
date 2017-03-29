@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import com.squareup.otto.Bus;
 import com.vpaliy.mvp.navigator.Navigator;
 import javax.inject.Inject;
@@ -15,6 +14,8 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Inject
     protected Navigator navigator;
+
+    @Inject
     protected Bus eventBus;
 
 
@@ -34,8 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         initializeInjector();
     }
-
-    @Inject
 
 
     @Override

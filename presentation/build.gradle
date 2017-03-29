@@ -36,6 +36,7 @@ dependencies {
     compile project(':domain')
     compile project(':data')
     compile project(':common')
+    compile project(':multiplechoice')
 
     compile libs.ottoEventBus
     compile libs.butterKnife

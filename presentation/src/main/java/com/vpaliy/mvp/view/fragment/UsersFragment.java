@@ -1,6 +1,7 @@
 package com.vpaliy.mvp.view.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,15 +9,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.vpaliy.domain.model.UserModel;
+import com.vpaliy.multiplechoice.BaseAdapter;
+import com.vpaliy.multiplechoice.MultiMode;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.di.component.DaggerFragmentComponent;
@@ -26,6 +31,7 @@ import com.vpaliy.mvp.view.adapter.UserAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
+import com.vpaliy.mvp.view.utils.snackbarUtils.Dismiss;
 import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
 import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 import java.util.List;
@@ -58,7 +64,25 @@ public class UsersFragment extends Fragment
     @BindView(R.id.refresher)
     protected SwipeRefreshLayout refresher;
 
+    @BindView(R.id.actionBar)
+    protected Toolbar actionBar;
+
     private Unbinder unbinder;
+
+    private MultiMode.Callback callback=new MultiMode.Callback() {
+        @Override
+        public boolean onMenuItemClick(BaseAdapter baseAdapter, MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.delete:
+                    View root=getView();
+                    if(root!=null){
+
+                    }
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,11 +163,19 @@ public class UsersFragment extends Fragment
 
     @Override
     public void showUserList(@NonNull List<UserModel> userModelList) {
-        adapter=new UserAdapter(getContext(),userModelList,eventBus);
-        userList.setLayoutManager(new GridLayoutManager(getContext(),
-                getResources().getInteger(R.integer.spanCount),
-                GridLayoutManager.HORIZONTAL,false));
+        adapter=new UserAdapter(getContext(),userModelList,eventBus,buildMultiMode());
+        userList.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL,false));
+        userList.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
         userList.setAdapter(adapter);
+    }
+
+    private MultiMode buildMultiMode(){
+        return new MultiMode.Builder(actionBar,getActivity())
+                .setBackgroundColor(Color.WHITE)
+                .setNavigationIcon(getResources().getDrawable(R.drawable.ic_clear_black_24dp))
+                .setMenu(R.menu.menu_list,callback)
+                .build();
     }
 
     @Override

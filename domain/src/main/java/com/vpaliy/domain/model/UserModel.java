@@ -12,6 +12,7 @@ public class UserModel {
     /* Optional data */
     private String emailAddress;
     private int age;
+    private byte[] userImage;
     private List<BookModel> bookList;
 
 
@@ -43,6 +44,14 @@ public class UserModel {
 
     public int getAge() {
         return age;
+    }
+
+    public void setUserImage(byte[] userImage) {
+        this.userImage = userImage;
+    }
+
+    public byte[] getUserImage() {
+        return userImage;
     }
 
     public String getEmailAddress() {

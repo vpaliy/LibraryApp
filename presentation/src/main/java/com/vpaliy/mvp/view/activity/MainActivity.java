@@ -79,12 +79,12 @@ public class MainActivity extends BaseActivity{
 
     @Override
     void register() {
-      //  eventBus.register(this);
+        eventBus.register(this);
     }
 
     @Override
     void unregister() {
-      ///  eventBus.unregister(this);
+        eventBus.unregister(this);
     }
 
     @Override

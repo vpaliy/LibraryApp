@@ -16,8 +16,12 @@ public class SnackbarWrapper {
     @NonNull
     private final Snackbar snackbar;
 
+
     @Nullable
-    private ActionCallback actionCallback;
+    private Dismiss dismissAction;
+
+    @Nullable
+    private Perform performAction;
 
     private int color;
 
@@ -62,8 +66,14 @@ public class SnackbarWrapper {
         return this;
     }
 
-    public SnackbarWrapper callback(@Nullable final ActionCallback callback) {
-        this.actionCallback=callback;
+
+    public SnackbarWrapper dismissCallback(@Nullable final Dismiss dismissAction){
+        this.dismissAction=dismissAction;
+        return this;
+    }
+
+    public SnackbarWrapper performCallback(@Nullable final Perform performAction){
+        this.performAction=performAction;
         return this;
     }
 
@@ -73,17 +83,22 @@ public class SnackbarWrapper {
     }
 
     public void show() {
-        if(actionCallback!=null) {
-            snackbar.setAction(actionCallback.message, v -> actionCallback.onCancel());
+        if(dismissAction!=null||performAction!=null) {
+         //   snackbar.setAction(actionCallback.message, v -> actionCallback.onCancel());
             snackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     super.onDismissed(transientBottomBar, event);
-                    actionCallback.onDismiss();
+                   if(dismissAction!=null){
+                       dismissAction.execute();
+                   }
                     switch (event) {
                         case DISMISS_EVENT_TIMEOUT:
                         case DISMISS_EVENT_SWIPE:
-                            actionCallback.onPerform();
+                            if(performAction!=null){
+                                performAction.execute();
+                            }
                             break;
                     }
                 }

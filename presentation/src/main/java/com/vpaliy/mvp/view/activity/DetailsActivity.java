@@ -1,6 +1,7 @@
 package com.vpaliy.mvp.view.activity;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import com.vpaliy.mvp.R;
 import com.vpaliy.mvp.view.fragment.BookDetailsFragment;
 import com.vpaliy.mvp.view.fragment.UserDetailsFragment;
 import com.vpaliy.mvp.view.utils.Constant;
+import com.vpaliy.mvp.view.utils.Permission;
 
 public class DetailsActivity extends BaseActivity {
 

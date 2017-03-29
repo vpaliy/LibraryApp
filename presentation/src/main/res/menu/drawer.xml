@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/users"
+            android:title="@string/userFragment" />
+
+        <item
+            android:id="@+id/books"
+            android:title="@string/bookFragment" />
+
+    </group>
+</menu>

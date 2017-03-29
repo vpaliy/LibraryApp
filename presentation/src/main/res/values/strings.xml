@@ -3,5 +3,9 @@
     <string name="submit">Submit</string>
     <string name="loadingError">Loading error has occurred</string>
     <string name="emptyData">No data available</string>
+    <string name="userFragment">User</string>
+    <string name="bookFragment">Book</string>
+    <string name="deleteItem">Delete</string>
+    <string name="deletedMessage">Data has been deleted</string>
 
 </resources>
