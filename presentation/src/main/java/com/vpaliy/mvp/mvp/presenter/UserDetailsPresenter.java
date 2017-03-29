@@ -1,6 +1,7 @@
 package com.vpaliy.mvp.mvp.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.vpaliy.common.scheduler.SchedulerProvider;
 import com.vpaliy.domain.interactor.GetModelDetails;
@@ -17,6 +18,8 @@ import static com.vpaliy.mvp.mvp.contract.UserDetailsContract.View;
 public class UserDetailsPresenter
     implements UserDetailsContract.Presenter {
 
+    private static final String TAG=UserDetailsPresenter.class.getSimpleName();
+
     private View view;
     private final GetModelDetails<UserModel> getDetails;
     private final CompositeSubscription subscriptions;
@@ -31,10 +34,12 @@ public class UserDetailsPresenter
     }
 
     @Override
-    public void start(@NonNull String ID) {
+    public void start(int ID) {
         subscriptions.add(getDetails.execute(ID)
-            .subscribeOn(schedulerProvider.ui())
-            .subscribe(this::processData));
+            .observeOn(schedulerProvider.ui())
+            .subscribe(this::processData,
+                       this::handleException,
+                       this::completeTask));
     }
 
     @Override
@@ -43,6 +48,15 @@ public class UserDetailsPresenter
             subscriptions.unsubscribe();
             subscriptions.clear();
         }
+    }
+
+    private void completeTask(){
+
+    }
+
+    private void handleException(Throwable throwable){
+        Log.e(TAG,throwable.getMessage());
+
     }
 
     private void processData(@NonNull UserModel model) {

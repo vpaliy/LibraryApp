@@ -18,7 +18,7 @@ public class UserEntity {
     private String emailAddress;
 
     @SerializedName("id")
-    private String ID;
+    private int ID;
 
     @SerializedName("age")
     private int age;
@@ -26,7 +26,7 @@ public class UserEntity {
     @SerializedName("bookList")
     private List<BookEntity> bookList;
 
-    public UserEntity(String firstName, String lastName, String ID) {
+    public UserEntity(String firstName, String lastName, int ID) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.ID=ID;
@@ -44,7 +44,7 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -68,7 +68,7 @@ public class UserEntity {
         return lastName;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 

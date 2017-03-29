@@ -1,11 +1,9 @@
 package com.vpaliy.mvp.view.activity;
 
-
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import android.support.v4.app.FragmentManager;
 import com.vpaliy.mvp.App;
 import com.vpaliy.mvp.R;
@@ -23,21 +21,30 @@ public class DetailsActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        //postpone the transition
+        if(Permission.checkForVersion(Build.VERSION_CODES.LOLLIPOP)){
+            postponeEnterTransition();
+        }
+
+        //
         final boolean hasBeenRecreated=savedInstanceState!=null;
         if(!hasBeenRecreated) {
             savedInstanceState=getIntent().getExtras();
         }
         actionCode=savedInstanceState.getInt(Constant.ACTION);
         if(!hasBeenRecreated) {
-            String ID=savedInstanceState.getString(Constant.ID);
-            if(ID!=null) {
-                setUp(ID);
-            }
+            int ID=savedInstanceState.getInt(Constant.ID);
+            setUp(ID);
         }
 
     }
 
-    private void setUp(@NonNull String ID) {
+    /**
+     * Sets up a fragment that represent the details of previously selected item
+     * @param ID the ID of the entity that should be displayed
+     */
+    private void setUp(int  ID) {
         FragmentManager manager=getSupportFragmentManager();
         switch (actionCode) {
             case Constant.USER_DETAILS:
@@ -68,4 +75,7 @@ public class DetailsActivity extends BaseActivity {
     void unregister() {
         eventBus.unregister(this);
     }
+
+
+
 }

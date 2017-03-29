@@ -19,7 +19,7 @@ public class RegisterUserPresenter implements Presenter {
     @Inject
     public RegisterUserPresenter(@NonNull AddUseCase<UserModel> addUseCase) {
         this.addUseCase=addUseCase;
-        this.user=new UserModel("name","last","id");
+        this.user=new UserModel("name","last",0);
     }
 
 

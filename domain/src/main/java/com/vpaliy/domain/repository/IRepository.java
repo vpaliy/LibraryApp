@@ -16,12 +16,12 @@ public interface IRepository<T> {
 
     /* Data providers */
     Observable<List<T>> getList();
-    Observable<T> findById(String ID);
+    Observable<T> findById(int ID);
 
     void add(T item);
     void add(Collection<T> collection);
     void update(T item);
     void delete(T item);
-    void deleteById(String ID);
+    void deleteById(int ID);
     void clear();
 }

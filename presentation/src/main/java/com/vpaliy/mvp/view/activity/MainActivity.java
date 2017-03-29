@@ -1,5 +1,7 @@
 package com.vpaliy.mvp.view.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,13 +12,19 @@ import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.transition.ChangeBounds;
+import android.transition.ChangeClipBounds;
+import android.transition.ChangeImageTransform;
+import android.transition.TransitionSet;
+import android.view.Window;
+import android.view.animation.DecelerateInterpolator;
+
 import com.squareup.otto.Subscribe;
 import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 
 public class MainActivity extends BaseActivity{
 
     private static final String TAG=MainActivity.class.getSimpleName();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,5 +99,6 @@ public class MainActivity extends BaseActivity{
     void initializeInjector() {
         App.app().provideAppComponent().inject(this);
     }
+
 
 }

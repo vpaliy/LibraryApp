@@ -13,7 +13,7 @@ import rx.Subscriber;
 public class BookRemoteSource extends DataSource<BookEntity> {
 
     @Override
-    public void deleteById(String ID) {
+    public void deleteById(int ID) {
 
     }
 
@@ -38,7 +38,7 @@ public class BookRemoteSource extends DataSource<BookEntity> {
     }
 
     @Override
-    public Observable<BookEntity> findById(String ID) {
+    public Observable<BookEntity> findById(int ID) {
         return null;
     }
 

@@ -16,5 +16,7 @@ final class DBConstants {
 
     static final String COMMA_SEP = ", ";
 
-    static final String PRIMARY_KEY="PRIMARY KEY";
+    static final String PRIMARY_KEY=" PRIMARY KEY ";
+
+    static final String AUTO_INCREMENT=" AUTOINCREMENT ";
 }

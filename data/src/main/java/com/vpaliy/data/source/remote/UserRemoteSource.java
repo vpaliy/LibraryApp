@@ -11,7 +11,7 @@ import rx.Observable;
 public class UserRemoteSource extends DataSource<UserEntity>{
 
     @Override
-    public void deleteById(String ID) {
+    public void deleteById(int ID) {
 
     }
 
@@ -31,7 +31,7 @@ public class UserRemoteSource extends DataSource<UserEntity>{
     }
 
     @Override
-    public Observable<UserEntity> findById(String ID) {
+    public Observable<UserEntity> findById(int ID) {
         return null;
     }
 

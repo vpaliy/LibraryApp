@@ -19,7 +19,7 @@ public class GetModelDetails<T> implements UseCase<T> {
         this.iRepository=iRepository;
     }
 
-    public Observable<T> execute(@NonNull String ID) {
+    public Observable<T> execute(@NonNull int ID) {
         return iRepository.findById(ID);
     }
 

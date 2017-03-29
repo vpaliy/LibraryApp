@@ -16,7 +16,7 @@ public interface UserDetailsContract {
     interface Presenter extends BasePresenter<View> {
         /* Actions */
         void onAttachView(@NonNull View view);
-        void start(@NonNull String ID);
+        void start(int ID);
         void stop();
 
         /* User interaction */

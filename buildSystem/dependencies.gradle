@@ -36,6 +36,7 @@ ext {
     SQLBriteVersion="1.1.1"
     ottoEventBusVersion= "1.3.8"
     circleIndicatorVersion="1.2.2"
+    glideVersion="3.7.0"
 
     /* Testing versions */
     robolectricVersion = '3.1.1'
@@ -51,6 +52,7 @@ ext {
 
     /** Presentation module **/
     presentationDependencies = [
+            glide:              "com.github.bumptech.glide:glide:${glideVersion}",
             supportAppCompat:   "com.android.support:appcompat-v7:${supportVersion}",
             supportDesign:       "com.android.support:design:${supportVersion}",
             Dagger2Compiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",

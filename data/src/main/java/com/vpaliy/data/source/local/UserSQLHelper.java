@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.vpaliy.data.source.local.DBConstants.AUTO_INCREMENT;
 import static com.vpaliy.data.source.local.DBConstants.COMMA_SEP;
 import static com.vpaliy.data.source.local.DBConstants.CREATE;
 import static com.vpaliy.data.source.local.DBConstants.INTEGER_TYPE;
@@ -21,8 +22,7 @@ class UserSQLHelper extends SQLiteOpenHelper{
     private static final String SQL_CREATE_ENTRIES =
             CREATE +UserEntry.TABLE_NAME +
                     " (" +
-                    UserEntry._ID + TEXT_TYPE + PRIMARY_KEY+COMMA_SEP +
-                    UserEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
+                    UserEntry.COLUMN_NAME_ENTRY_ID + INTEGER_TYPE + PRIMARY_KEY+AUTO_INCREMENT+COMMA_SEP +
                     UserEntry.COLUMN_FIRST_NAME + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_LAST_NAME + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_EMAIL_ADDRESS +TEXT_TYPE+COMMA_SEP +

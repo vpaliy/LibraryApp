@@ -10,7 +10,7 @@ public class BookModel {
     /* Required data */
     private String author;
     private String title;
-    private String ID;
+    private int ID;
 
     /* Optional data */
     private String description;
@@ -19,7 +19,7 @@ public class BookModel {
     private int ageRestriction;
     private List<UserModel> readerList;
 
-    public BookModel(String author, String title, String ID){
+    public BookModel(String author, String title, int ID){
         this.author=author;
         this.title=title;
         this.ID=ID;
@@ -41,7 +41,7 @@ public class BookModel {
         this.description=description;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID=ID;
     }
 
@@ -77,7 +77,7 @@ public class BookModel {
         return title;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 

@@ -45,9 +45,9 @@ public class BookLocalSource extends DataSource<BookEntity> {
     }
 
     private BookEntity getBook(@NonNull Cursor cursor) {
-        String author=cursor.getColumnName(cursor.getColumnIndex(BookEntry.COLUMN_NAME_AUTHOR));
-        String title=cursor.getColumnName(cursor.getColumnIndex(BookEntry.COLUMN_NAME_TITLE));
-        String ID=cursor.getColumnName(cursor.getColumnIndex(BookEntry.COLUMN_NAME_ENTRY_ID));
+        String author=cursor.getString((cursor.getColumnIndex(BookEntry.COLUMN_NAME_AUTHOR)));
+        String title=cursor.getString(cursor.getColumnIndex(BookEntry.COLUMN_NAME_TITLE));
+        int ID=cursor.getInt(cursor.getColumnIndex(BookEntry.COLUMN_NAME_ENTRY_ID));
         String description=cursor.getString(cursor.getColumnIndex(BookEntry.COLUMN_NAME_DESCRIPTION));
         String genre=cursor.getString(cursor.getColumnIndex(BookEntry.COLUMN_GENRE));
         int numberOfPages=cursor.getInt(cursor.getColumnIndex(BookEntry.COLUMN_NUMBER_OF_PAGES));
@@ -62,9 +62,9 @@ public class BookLocalSource extends DataSource<BookEntity> {
     }
 
     @Override
-    public void deleteById(String ID) {
+    public void deleteById(int ID) {
         String selection=BookEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={ID};
+        String[] selectionArgs={Integer.toString(ID)};
 
         database.delete(BookEntry.TABLE_NAME,selection,selectionArgs);
     }
@@ -72,7 +72,7 @@ public class BookLocalSource extends DataSource<BookEntity> {
     @Override
     public void delete(BookEntity item) {
         String selection=BookEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={item.getID()};
+        String[] selectionArgs={Integer.toString(item.getID())};
 
         database.delete(BookEntry.TABLE_NAME,selection,selectionArgs);
     }
@@ -90,7 +90,7 @@ public class BookLocalSource extends DataSource<BookEntity> {
         values.put(BookEntry.COLUMN_NUMBER_OF_PAGES,item.getNumberOfPages());
 
         String selection=BookEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={item.getID()};
+        String[] selectionArgs={Integer.toString(item.getID())};
 
         database.update(BookEntry.TABLE_NAME,values,selection,selectionArgs);
     }
@@ -114,7 +114,7 @@ public class BookLocalSource extends DataSource<BookEntity> {
     }
 
     @Override
-    public Observable<BookEntity> findById(String ID) {
+    public Observable<BookEntity> findById(int ID) {
         String[] projection= {
                 BookEntry.COLUMN_NAME_ENTRY_ID,
                 BookEntry.COLUMN_NAME_AUTHOR,

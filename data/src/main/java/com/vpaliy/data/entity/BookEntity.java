@@ -18,7 +18,7 @@ public class BookEntity {
     private String genre;
 
     @SerializedName("id")
-    private String ID;
+    private int ID;
 
     @SerializedName("numberOfPages")
     private int numberOfPages;
@@ -26,7 +26,7 @@ public class BookEntity {
     @SerializedName("ageRestriction")
     private int ageRestriction;
 
-    public BookEntity(String author, String title, String ID){
+    public BookEntity(String author, String title, int ID){
         this.author=author;
         this.title=title;
         this.ID=ID;
@@ -48,7 +48,7 @@ public class BookEntity {
         this.description=description;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID=ID;
     }
 
@@ -84,7 +84,7 @@ public class BookEntity {
         return title;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 

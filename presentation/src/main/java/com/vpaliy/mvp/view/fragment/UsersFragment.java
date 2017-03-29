@@ -31,7 +31,6 @@ import com.vpaliy.mvp.view.adapter.UserAdapter;
 import com.vpaliy.mvp.view.utils.Constant;
 import com.vpaliy.mvp.view.utils.eventBus.ExternalAction;
 import com.vpaliy.mvp.view.utils.eventBus.InternalAction;
-import com.vpaliy.mvp.view.utils.snackbarUtils.Dismiss;
 import com.vpaliy.mvp.view.utils.snackbarUtils.SnackbarWrapper;
 import com.vpaliy.mvp.view.wrapper.TransitionWrapper;
 import java.util.List;

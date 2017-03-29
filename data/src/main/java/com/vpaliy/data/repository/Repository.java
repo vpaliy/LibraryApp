@@ -55,16 +55,18 @@ public class Repository<Fake,Real> implements IRepository<Real> {
 
     @Override
     public Observable<List<Real>> getList() {
+        //TODO set up the remote source
         return //Observable.concat(
                 localSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList());//l,
                 //remoteSource.getList().flatMap(fakes->Observable.from(mapper.map(fakes)).toList()));
     }
 
     @Override
-    public Observable<Real> findById(String ID) {
-        return Observable.concat(
-                localSource.findById(ID).map(mapper::map),
-                remoteSource.findById(ID).map(mapper::map));
+    public Observable<Real> findById(int ID) {
+        //TODO set up the remote source
+        return// Observable.concat(
+                localSource.findById(ID).map(mapper::map);
+               // remoteSource.findById(ID).map(mapper::map));
     }
 
     @Override
@@ -86,7 +88,7 @@ public class Repository<Fake,Real> implements IRepository<Real> {
     }
 
     @Override
-    public void deleteById(String ID) {
+    public void deleteById(int ID) {
         localSource.deleteById(ID);
         remoteSource.deleteById(ID);
     }

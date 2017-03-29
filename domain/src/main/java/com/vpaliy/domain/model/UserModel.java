@@ -7,7 +7,7 @@ public class UserModel {
     /* Required data */
     private String firstName;
     private String lastName;
-    private String ID;
+    private int ID;
 
     /* Optional data */
     private String emailAddress;
@@ -16,7 +16,7 @@ public class UserModel {
     private List<BookModel> bookList;
 
 
-    public UserModel(String firstName, String lastName, String ID) {
+    public UserModel(String firstName, String lastName, int ID) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.ID=ID;
@@ -34,7 +34,7 @@ public class UserModel {
         this.firstName = firstName;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -66,7 +66,7 @@ public class UserModel {
         return lastName;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 }

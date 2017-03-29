@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 @RunWith(MockitoJUnitRunner.class)
 public class GetModelDetailsTest extends UseCaseTest {
 
-    private static final String FAKE_ID="fakeID";
+    private static final int FAKE_ID=123;
 
     @Test
     public void testGetUserDetailsMethod() {

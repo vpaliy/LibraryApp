@@ -19,6 +19,7 @@ import static com.vpaliy.mvp.mvp.contract.UserListContract.*;
 @ViewScope
 public class UserListPresenter implements Presenter {
 
+    private static final String TAG=UserListPresenter.class.getSimpleName();
     /* Use cases */
     private final GetListUseCase<UserModel> getListUseCase;
     private final DeleteUseCase<UserModel> deleteUseCase;
@@ -95,6 +96,9 @@ public class UserListPresenter implements Presenter {
     private void processData(@NonNull List<UserModel> userList) {
         view.setLoadingIndicator(false);
         if(!userList.isEmpty()) {
+            for(UserModel model:userList){
+                Log.e(TAG,Integer.toString(model.getID()));
+            }
             view.showUserList(userList);
         }else{
             view.showEmptyMessage();

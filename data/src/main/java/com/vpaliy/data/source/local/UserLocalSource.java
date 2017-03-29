@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
@@ -23,6 +24,8 @@ import static com.vpaliy.data.source.local.PersistenceContract.UserEntry;
 
 public class UserLocalSource extends DataSource<UserEntity> {
 
+    private static final String TAG=UserLocalSource.class.getSimpleName();
+
     @NonNull
     private BriteDatabase database;
 
@@ -31,7 +34,7 @@ public class UserLocalSource extends DataSource<UserEntity> {
 
     @Inject
     public UserLocalSource(@NonNull Context context,
-                            @NonNull SchedulerProvider schedulerProvider) {
+                           @NonNull SchedulerProvider schedulerProvider) {
         checkNotNull(context);
         checkNotNull(schedulerProvider);
         UserSQLHelper userSQLHelper=new UserSQLHelper(context);
@@ -45,7 +48,7 @@ public class UserLocalSource extends DataSource<UserEntity> {
     private UserEntity getUser(@NonNull Cursor cursor) {
         String firstName=cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_FIRST_NAME));
         String lastName=cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_LAST_NAME));
-        String ID=cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_ENTRY_ID));
+        int  ID=cursor.getInt(cursor.getColumnIndex(UserEntry.COLUMN_NAME_ENTRY_ID));
         String emailAddress=cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_EMAIL_ADDRESS));
         int age=cursor.getInt(cursor.getColumnIndex(UserEntry.COLUMN_AGE));
 
@@ -56,9 +59,9 @@ public class UserLocalSource extends DataSource<UserEntity> {
     }
 
     @Override
-    public void deleteById(String ID) {
+    public void deleteById(int ID) {
         String selection=UserEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={ID};
+        String[] selectionArgs={Integer.toString(ID)};
 
         database.delete(UserEntry.TABLE_NAME,selection,selectionArgs);
     }
@@ -66,7 +69,7 @@ public class UserLocalSource extends DataSource<UserEntity> {
     @Override
     public void delete(UserEntity item) {
         String selection=UserEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={item.getID()};
+        String[] selectionArgs={Integer.toString(item.getID())};
 
         database.delete(UserEntry.TABLE_NAME,selection,selectionArgs);
     }
@@ -83,7 +86,7 @@ public class UserLocalSource extends DataSource<UserEntity> {
         values.put(UserEntry.COLUMN_EMAIL_ADDRESS,item.getEmailAddress());
 
         String selection=UserEntry.COLUMN_NAME_ENTRY_ID+" LIKE ?";
-        String[] selectionArgs={item.getID()};
+        String[] selectionArgs={Integer.toString(item.getID())};
 
         database.update(UserEntry.TABLE_NAME,values,selection,selectionArgs);
     }
@@ -100,11 +103,10 @@ public class UserLocalSource extends DataSource<UserEntity> {
 
         String SQL=String.format("SELECT %s FROM %s", TextUtils.join(",",projection),UserEntry.TABLE_NAME);
         return database.createQuery(UserEntry.TABLE_NAME,SQL)
-            .mapToList(mapper);
-    }
+                .mapToList(mapper);    }
 
     @Override
-    public Observable<UserEntity> findById(String ID) {
+    public Observable<UserEntity> findById(int ID) {
         String[] projection= {
                 UserEntry.COLUMN_NAME_ENTRY_ID,
                 UserEntry.COLUMN_FIRST_NAME,
@@ -116,8 +118,8 @@ public class UserLocalSource extends DataSource<UserEntity> {
         String SQL=String.format("SELECT %s FROM %s WHERE %s LIKE ?",
                 TextUtils.join(",", projection), UserEntry.TABLE_NAME,UserEntry.COLUMN_NAME_ENTRY_ID);
 
-        return database.createQuery(UserEntry.TABLE_NAME,SQL,ID)
-            .mapToOne(mapper);
+        return database.createQuery(UserEntry.TABLE_NAME,SQL,Integer.toString(ID))
+                .mapToOne(mapper);
     }
 
     @Override
@@ -125,7 +127,6 @@ public class UserLocalSource extends DataSource<UserEntity> {
         checkNotNull(item);
 
         ContentValues values=new ContentValues();
-        values.put(UserEntry.COLUMN_NAME_ENTRY_ID,item.getID());
         values.put(UserEntry.COLUMN_FIRST_NAME,item.getFirstName());
         values.put(UserEntry.COLUMN_LAST_NAME,item.getLastName());
         values.put(UserEntry.COLUMN_AGE,item.getAge());

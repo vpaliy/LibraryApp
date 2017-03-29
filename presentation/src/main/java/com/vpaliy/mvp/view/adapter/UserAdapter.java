@@ -83,7 +83,7 @@ public class UserAdapter extends BaseAdapter{
                     isClicked = true;
                     UserModel model = data.get(getAdapterPosition());
                     Bundle args = new Bundle();
-                    args.putString(Constant.ID, model.getID());
+                    args.putInt(Constant.ID, model.getID());
                     if (Permission.checkForVersion(Build.VERSION_CODES.LOLLIPOP)) {
                         args.putString(Constant.TRANSITION_NAME, image.getTransitionName());
                     }

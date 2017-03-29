@@ -19,11 +19,11 @@ public class BookDetailsFragment extends Fragment
     implements BookDetailsContract.View{
 
     private Presenter presenter;
-    private String ID;
+    private int ID;
 
-    public static BookDetailsFragment newInstance(@NonNull String ID) {
+    public static BookDetailsFragment newInstance(int ID) {
         Bundle args=new Bundle();
-        args.putString(Constant.ID,ID);
+        args.putInt(Constant.ID,ID);
         BookDetailsFragment fragment=new BookDetailsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -35,7 +35,7 @@ public class BookDetailsFragment extends Fragment
         if(savedInstanceState==null) {
             savedInstanceState=getArguments();
         }
-        this.ID=savedInstanceState.getString(Constant.ID);
+        this.ID=savedInstanceState.getInt(Constant.ID);
         initializeInjector();
     }
 
@@ -73,7 +73,7 @@ public class BookDetailsFragment extends Fragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(Constant.ID,ID);
+        outState.putInt(Constant.ID,ID);
         super.onSaveInstanceState(outState);
     }
 }
